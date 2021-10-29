@@ -154,7 +154,8 @@ public class LoginActivity extends AppCompatActivity {
                                     response.body().getData().get_id(),
                                     response.body().getData().getUsername(),
                                     response.body().getData().getUser_email(),
-                                    response.body().getData().getParent_code()
+                                    response.body().getData().getParent_code(),
+                                    response.body().getData().getPassword()
 
                             );
                             Intent intent = new Intent(LoginActivity.this, DashoardActivity.class);

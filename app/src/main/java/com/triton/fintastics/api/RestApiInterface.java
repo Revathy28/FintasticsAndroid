@@ -1,10 +1,12 @@
 package com.triton.fintastics.api;
 
 
+import com.triton.fintastics.requestpojo.ChangePasswordRequest;
 import com.triton.fintastics.requestpojo.EmailOTPRequest;
 import com.triton.fintastics.requestpojo.LoginRequest;
 import com.triton.fintastics.requestpojo.ReferralCodeRequest;
 import com.triton.fintastics.requestpojo.SignupRequest;
+import com.triton.fintastics.requestpojo.TransactionCreateRequest;
 import com.triton.fintastics.responsepojo.EmailOTPResponse;
 import com.triton.fintastics.responsepojo.LoginResponse;
 import com.triton.fintastics.responsepojo.PaymentTypeListResponse;
@@ -47,11 +49,17 @@ public interface RestApiInterface {
     @POST("userdetails/forgotpassword")
     Call<SuccessResponse> forgetPasswordResponseCall(@Header("Content-Type") String type, @Body LoginRequest loginRequest);
 
+    /*Change password*/
+    @POST("userdetails/mobile/update/profile")
+    Call<SignupResponse> changePasswordResponseCall(@Header("Content-Type") String type, @Body ChangePasswordRequest changePasswordRequest);
 
     /*Payment Type List */
     @GET("payment_type/getlist")
     Call<PaymentTypeListResponse> paymentTypeListResponseCall(@Header("Content-Type") String type);
 
+    /*Transaction Create*/
+    @POST("transaction/create")
+    Call<SuccessResponse> transactionCreateRequestCall(@Header("Content-Type") String type, @Body TransactionCreateRequest transactionCreateRequest);
 
 
 }

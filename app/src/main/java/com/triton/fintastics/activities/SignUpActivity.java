@@ -318,7 +318,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     response.body().getData().get_id(),
                                     response.body().getData().getUsername(),
                                     response.body().getData().getUser_email(),
-                                    response.body().getData().getParent_code()
+                                    response.body().getData().getParent_code(),
+                                    response.body().getData().getPassword()
 
                             );
                             gotoDashboard();

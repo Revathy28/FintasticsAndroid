@@ -24,6 +24,7 @@ public class SessionManager {
     public static final String KEY_USERNAME = "username";
     public static final String KEY_EMAIL_ID = "user_email";
     public static final String KEY_REF_CODE= "parent_code";
+    public static final String KEY_PASSWORD = "password";
 
 
 
@@ -55,12 +56,13 @@ public class SessionManager {
     }
 
 
-    public void createLoginSession(String id, String username,String useremail, String refcode) {
+    public void createLoginSession(String id, String username,String useremail, String refcode,String password) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ID, id);
         editor.putString(KEY_USERNAME, username);
         editor.putString(KEY_EMAIL_ID, useremail);
         editor.putString(KEY_REF_CODE,refcode);
+        editor.putString(KEY_PASSWORD,password);
         Log.e(TAG, "................................>> session Login Details " + "KEY_ID" + id);
 
         editor.commit();
@@ -75,6 +77,7 @@ public class SessionManager {
         user.put(KEY_USERNAME, pref.getString(KEY_USERNAME, ""));
         user.put(KEY_EMAIL_ID, pref.getString(KEY_EMAIL_ID, ""));
         user.put(KEY_REF_CODE, pref.getString(KEY_REF_CODE, ""));
+        user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, ""));
         return user;
     }
 
