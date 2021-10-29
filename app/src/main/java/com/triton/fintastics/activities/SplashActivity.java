@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.WindowManager;
 
 import com.triton.fintastics.R;
+import com.triton.fintastics.sessionmanager.SessionManager;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -26,6 +27,12 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         Log.w("Oncreate", TAG);
 
+        SessionManager session = new SessionManager(getApplicationContext());
+        boolean islogedin = session.isLoggedIn();
+        Log.w(TAG,"islogedin-->"+islogedin);
+
+
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -33,16 +40,19 @@ public class SplashActivity extends AppCompatActivity {
         //can cover the entire screen.
 
 
+
         new Handler().postDelayed(() -> {
-            Intent i=new Intent(SplashActivity.this,
-                    ChooseAccountTypeActivity.class);
-            //Intent is used to switch from one activity to another.
+            if(islogedin){
+                Intent i = new Intent(SplashActivity.this, DashoardActivity.class);
+                startActivity(i);
+                finish();
+            }else{
+                Intent i = new Intent(SplashActivity.this, ChooseAccountTypeActivity.class);
+                startActivity(i);
+                finish();
+            }
 
-            startActivity(i);
-            //invoke the SecondActivity.
 
-            finish();
-            //the current activity will get finished.
         }, SPLASH_SCREEN_TIME_OUT);
 
     }

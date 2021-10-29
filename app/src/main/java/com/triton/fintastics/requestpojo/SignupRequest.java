@@ -7,12 +7,17 @@ public class SignupRequest {
      * password : 20-20-2021
      * user_email : mohammedimthi2395@gmail.com
      * mobile_type : Android
+     * parent_of : 133we
      */
+
+
 
     private String username;
     private String password;
     private String user_email;
     private String mobile_type;
+    private String parent_of;
+
 
     public String getUsername() {
         return username;
@@ -45,5 +50,14 @@ public class SignupRequest {
     public void setMobile_type(String mobile_type) {
         this.mobile_type = mobile_type;
     }
+
+    public String getParent_of() {
+        return parent_of;
+    }
+
+    public void setParent_of(String parent_of) {
+        this.parent_of = parent_of;
+    }
+
 
 }
