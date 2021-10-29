@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_personal"
+    android:layout_width="@dimen/_260dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_corner_bg_white"
+    android:orientation="horizontal"
+    android:padding="@dimen/_15dp"
+    android:layout_gravity="top|center"
+    android:layout_margin="@dimen/_10dp">
+
+<TextView
+    android:id="@+id/txt_memberlist"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:fontFamily="@font/roboto_bold"
+    android:gravity="center"
+    android:text="@string/family_members"
+    android:textColor="@color/blue"
+    android:textSize="16sp"
+    android:maxLines="1"
+    android:ellipsize="end"/>
+
+</LinearLayout>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".transactionreport.TranscationReportActivity">
+
+    <LinearLayout
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_header"
+            layout="@layout/toolbar_header_layout_with_backnavg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollablContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footerView"
+        android:layout_below="@+id/headerView"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_alldays"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txt_alldays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    android:layout_marginRight="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/all"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/_18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_ondate"
+                    android:layout_width="@dimen/_30dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edt_ondate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    android:layout_marginRight="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_corner_bg_blue"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="@string/on_date"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:padding="@dimen/_15dp"
+                    android:textColor="@color/txt_black"
+                    android:textColorHint="@color/hint_color"
+                    android:textSize="16sp"
+                    tools:ignore="Autofill,LabelFor" />
+
+                <ImageView
+                    android:id="@+id/img_ondate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/arrow_image"
+                    app:srcCompat="@drawable/calander" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_fromdate"
+                    android:layout_width="@dimen/_30dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edt_fromdate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    android:layout_marginRight="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_corner_bg_blue"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="@string/from"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:padding="@dimen/_15dp"
+                    android:textColor="@color/txt_black"
+                    android:textColorHint="@color/hint_color"
+                    android:textSize="16sp"
+                    tools:ignore="Autofill,LabelFor" />
+
+                <ImageView
+                    android:id="@+id/img_fromdate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/arrow_image"
+                    app:srcCompat="@drawable/calander" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_none1"
+                    android:layout_width="@dimen/_30dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_todate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/edt_todate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_20dp"
+                        android:layout_marginRight="@dimen/_20dp"
+                        android:background="@drawable/rectangle_corner_bg_blue"
+                        android:fontFamily="@font/roboto_medium"
+                        android:hint="@string/to"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:padding="@dimen/_15dp"
+                        android:textColor="@color/txt_black"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="16sp"
+                        tools:ignore="Autofill,LabelFor" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/img_todate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/arrow_image"
+                    app:srcCompat="@drawable/calander" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_corner_bg_thicblue"
+                    android:orientation="vertical"
+                    android:onClick="gotoTransactionReportShow">
+
+                    <TextView
+                        android:id="@+id/txt_submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@color/primary"
+                        android:drawablePadding="@dimen/_20dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/submit"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_20sp"
+                        tools:ignore="UseCompatTextViewDrawableXml" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/footerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".familyaccount.SharelinkFamilyMembersActivity">
+
+    <LinearLayout
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_header"
+            layout="@layout/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollablContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footerView"
+        android:layout_below="@+id/headerView">
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginLeft="@dimen/_20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_lbl_selectfamlymemb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_marginLeft="@dimen/_20dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_20dp"
+                android:layout_marginRight="@dimen/_20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/share_the_app_link_to_your_family_members"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/_18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_familymembers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txt_allfamilymembers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    android:layout_marginRight="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/all"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/_18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_selectfamilymembers"
+                    android:layout_width="@dimen/_30dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edt_selectfamilymember"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    android:layout_marginRight="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_corner_bg_blue"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="@string/select_member"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:padding="@dimen/_15dp"
+                    android:textColor="@color/txt_black"
+                    android:textColorHint="@color/hint_color"
+                    android:textSize="16sp"
+                    tools:ignore="Autofill,LabelFor" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_15dp">
+
+                <RadioButton
+                    android:id="@+id/rb_none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingStart="@dimen/_20dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_setProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_corner_bg_thicblue"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_setProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@color/primary"
+                        android:drawableStart="@drawable/icn_share"
+                        android:drawableLeft="@drawable/icn_share"
+                        android:drawablePadding="@dimen/_20dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:onClick="gotoDashboard"
+                        android:text="@string/share"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_20sp"
+                        app:drawableStartCompat="@drawable/icn_share"
+                        tools:ignore="UseCompatTextViewDrawableXml" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/footerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+</RelativeLayout>

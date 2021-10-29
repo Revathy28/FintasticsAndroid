@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top|center"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/_15dp">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_20dp"
+        android:layout_marginLeft="@dimen/_20dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:maxLines="1"
+        android:padding="@dimen/_5dp"
+        android:text="@string/sucessfully_link_is_shared"
+        android:textColor="@color/green"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txt_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_20dp"
+        android:layout_marginLeft="@dimen/_20dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:maxLines="1"
+        android:padding="@dimen/_5dp"
+        android:text="@string/sign_in_sign_up_through_the_link"
+        android:textColor="@color/grey"
+        android:textSize="12sp" />
+
+</LinearLayout>

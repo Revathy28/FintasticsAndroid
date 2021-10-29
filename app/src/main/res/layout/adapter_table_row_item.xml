@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_personal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_alignBottom="@dimen/_5dp">
+
+    <TableLayout
+        android:id="@+id/table_heading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_sno"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35dp"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/_1"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/txt_dated"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35dp"
+                android:layout_column="1"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/_23_march_2021"
+                android:textAlignment="center"
+                android:textColor="@color/primary" />
+
+            <TextView
+                android:id="@+id/txt_added"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35dp"
+                android:layout_column="2"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/_0_36"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/txt_deducted"
+                style="@style/table_row_item"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35dp"
+                android:layout_column="3"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/_0_36"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

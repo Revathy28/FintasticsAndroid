@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.triton.fintastics" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true" >
+
+        <activity
+            android:name=".chat.ChatActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".budgetary.BudgetaryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".movementlist.MovementListShowDataActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".movementlist.MovementListActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".accountsummary.AccountSummaryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".transactionreport.TranscationReportShowDataActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".transactionreport.TranscationReportActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".expenditurereport.ExpenditureReportShowDataActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".expenditurereport.ExpenditureReportActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".incomereport.IncomeReportShowDataActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".incomereport.IncomeReportActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.DashoardActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            android:windowSoftInputMode="adjustPan">
+
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+        <activity
+            android:name=".familyaccount.SharelinkFamilyMembersActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".familyaccount.CreateProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".familyaccount.SetPrrofileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".familyaccount.SelectFamilyMembersActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ChooseAccountTypeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+    </application>
+
+</manifest>
