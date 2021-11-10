@@ -5,24 +5,27 @@
     <group
         android:id="@+id/group1">
         <item android:id="@+id/nav_item_one"
+            android:icon="@drawable/icn_budgetary"
+            android:title="@string/add_transaction"/>
+        <item android:id="@+id/nav_item_two"
             android:icon="@drawable/icn_income_report"
             android:title="@string/income_report"/>
 
 
-        <item android:id="@+id/nav_item_two"
+        <item android:id="@+id/nav_item_three"
             android:icon="@drawable/icn_expenditure_report"
             android:title="@string/expenditure_report" />
 
-        <item android:id="@+id/nav_item_three"
+        <item android:id="@+id/nav_item_four"
         android:icon="@drawable/icn_transaction_report"
         android:title="@string/transaction_report" />
 
-        <item android:id="@+id/nav_item_ten"
+        <item android:id="@+id/nav_item_five"
             android:icon="@drawable/icn_movement_list"
             android:title="@string/movement_list"
             />
 
-    <item android:id="@+id/nav_item_four"
+    <item android:id="@+id/nav_item_six"
         android:icon="@drawable/icn_account_summary"
         android:title="@string/account_summary"
         />
@@ -38,18 +41,18 @@
             >
 
             <menu>
-        <item android:id="@+id/nav_item_five"
+        <item android:id="@+id/nav_item_seven"
             android:icon="@drawable/icn_change_password"
             android:title="@string/change_password"
            />
 
             <item
-                android:id="@+id/nav_item_six"
+                android:id="@+id/nav_item_eight"
                 android:icon="@drawable/icn_budgetary"
                 android:title="@string/budgetary"
                />
 
-        <item android:id="@+id/nav_item_seven"
+        <item android:id="@+id/nav_item_nine"
             android:icon="@drawable/icn_chat_icon"
             android:title="@string/chat"
             android:visible="true"/>

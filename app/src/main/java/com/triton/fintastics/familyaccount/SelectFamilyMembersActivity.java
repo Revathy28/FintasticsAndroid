@@ -51,6 +51,8 @@ public class SelectFamilyMembersActivity extends AppCompatActivity implements Se
         setContentView(R.layout.activity_select_family_members);
         ButterKnife.bind(this);
 
+        Log.w(TAG,"onCreate");
+
         avi_indicator.setVisibility(View.GONE);
 
         setFamilyMembersList();
@@ -64,7 +66,8 @@ public class SelectFamilyMembersActivity extends AppCompatActivity implements Se
         familyListModelList.add(new FamilyListModel("Father",1,false));
         familyListModelList.add(new FamilyListModel("Mother",2,false));
         familyListModelList.add(new FamilyListModel("Wife",3,false));
-        familyListModelList.add(new FamilyListModel("Other..",4,false));
+        familyListModelList.add(new FamilyListModel("Daughter/Son",4,false));
+        familyListModelList.add(new FamilyListModel("Other..",5,false));
 
 
         FamilyMembersListAdapter adapter = new FamilyMembersListAdapter(familyListModelList,this,this);

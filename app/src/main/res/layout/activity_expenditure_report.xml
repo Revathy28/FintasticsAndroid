@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    tools:context=".expenditurereport.ExpenditureReportActivity">
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/headerView"
@@ -52,7 +51,8 @@
                     android:paddingStart="@dimen/_20dp"
                     android:paddingEnd="@dimen/_20dp"
                     android:textColor="@color/text_black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:checked="true"/>
 
                 <TextView
                     android:id="@+id/txt_alldays"
@@ -87,8 +87,8 @@
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/edt_ondate"
+                <TextView
+                    android:id="@+id/txt_ondate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_20dp"
@@ -99,8 +99,6 @@
                     android:background="@drawable/rectangle_corner_bg_blue"
                     android:fontFamily="@font/roboto_medium"
                     android:hint="@string/on_date"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
                     android:lines="1"
                     android:padding="@dimen/_15dp"
                     android:textColor="@color/txt_black"
@@ -136,8 +134,8 @@
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/edt_fromdate"
+                <TextView
+                    android:id="@+id/txt_fromdate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_20dp"
@@ -148,8 +146,6 @@
                     android:background="@drawable/rectangle_corner_bg_blue"
                     android:fontFamily="@font/roboto_medium"
                     android:hint="@string/from"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
                     android:lines="1"
                     android:padding="@dimen/_15dp"
                     android:textColor="@color/txt_black"
@@ -176,7 +172,7 @@
                 android:padding="@dimen/_15dp">
 
                 <RadioButton
-                    android:id="@+id/rb_none1"
+                    android:id="@+id/rb_none"
                     android:layout_width="@dimen/_30dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
@@ -195,8 +191,8 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/edt_todate"
+                    <TextView
+                        android:id="@+id/txt_todate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_20dp"
@@ -204,8 +200,6 @@
                         android:background="@drawable/rectangle_corner_bg_blue"
                         android:fontFamily="@font/roboto_medium"
                         android:hint="@string/to"
-                        android:imeOptions="actionDone"
-                        android:inputType="text"
                         android:lines="1"
                         android:padding="@dimen/_15dp"
                         android:textColor="@color/txt_black"
@@ -233,28 +227,16 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/_15dp">
 
-                <RadioButton
-                    android:id="@+id/rb_none"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
-                    android:paddingStart="@dimen/_20dp"
-                    android:paddingEnd="@dimen/_20dp"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
-                    android:visibility="invisible" />
 
                 <RelativeLayout
                     android:id="@+id/rl_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40dp"
-                    android:layout_marginStart="@dimen/_20dp"
-                    android:layout_marginLeft="@dimen/_20dp"
+                    android:layout_marginStart="@dimen/_60dp"
+                    android:layout_marginEnd="@dimen/_60dp"
                     android:layout_weight="1"
                     android:background="@drawable/rectangle_corner_bg_thicblue"
-                    android:orientation="vertical"
-                    android:onClick="gotoExpenditureReportShow">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_submit"
@@ -264,7 +246,7 @@
                         android:background="@color/primary"
                         android:drawablePadding="@dimen/_20dp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="@string/submit"
+                        android:text="Submit"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_20sp"

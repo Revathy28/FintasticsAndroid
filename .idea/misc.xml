@@ -4,37 +4,56 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/rectangle_corner_bg_white_corner_blue.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/textview_bg_change.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/textview_bg_chat.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_blue.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_grey.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_thicblue.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_white.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangular_corner_bg_darkblue.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rounded_color.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_account_summary.xml" value="0.24010416666666667" />
-        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_budgetary.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_add_transaction.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_budgetary.xml" value="0.264" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_change_password.xml" value="0.12360688956433637" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_chat.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_choose_account_type.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_create_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_dashoard.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_edit_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_expenditure_report.xml" value="0.432808155699722" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_expenditure_report_show_data.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_forget_password.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_income_report.xml" value="0.13020833333333334" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_income_report_show_data.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_login.xml" value="0.536" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_movement_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_movement_list_show_data.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_mygroup.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_select_family_members.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_set_prrofile.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_sharelink_family_members.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_transcation_report.xml" value="0.13020833333333334" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_transcation_report_show_data.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_accountsummarry.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_chat_cardview.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_childdetails.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_expenselist.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_familymemberslist.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_selectfamilymemberslist.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_table_row_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_transacperiod.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/adapter_transactionlist.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/alert_logout_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/alert_no_internet_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/header_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/nav_header_main.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/navigation_drawer_layout_new.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/show_link_share_success_popup__layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/spinner_item.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/toolbar_header_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/toolbar_header_layout_with_backnavg.xml" value="0.13020833333333334" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/menu/navigation_menu_drawer.xml" value="0.25416666666666665" />
@@ -97,7 +116,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

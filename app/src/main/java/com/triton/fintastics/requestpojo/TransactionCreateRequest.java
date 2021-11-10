@@ -8,6 +8,7 @@ public class TransactionCreateRequest {
      * transaction_desc : Salary
      * transaction_way : Credit
      * transaction_amount : 2000
+     * transaction_balance  : 2000
      * user_id : 617a7c37eeb3a520395e2f15
      * parent_code :
      */
@@ -17,6 +18,7 @@ public class TransactionCreateRequest {
     private String transaction_desc;
     private String transaction_way;
     private int transaction_amount;
+    private int transaction_balance ;
     private String user_id;
     private String parent_code;
 
@@ -58,6 +60,14 @@ public class TransactionCreateRequest {
 
     public void setTransaction_amount(int transaction_amount) {
         this.transaction_amount = transaction_amount;
+    }
+
+    public int getTransaction_balance() {
+        return transaction_balance;
+    }
+
+    public void setTransaction_balance(int transaction_balance) {
+        this.transaction_balance = transaction_balance;
     }
 
     public String getUser_id() {

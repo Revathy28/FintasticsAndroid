@@ -115,6 +115,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".familyaccount.EditProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".familyaccount.SetPrrofileActivity"
             android:exported="true"
@@ -123,6 +130,12 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".familyaccount.SelectFamilyMembersActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".familyaccount.MyGrooupActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
@@ -159,6 +172,14 @@
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+
+
+        <!--transaction-->
+        <activity
+            android:name=".transaction.AddTransactionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />

@@ -5,31 +5,31 @@ public class LoginResponse {
     /**
      * Status : Success
      * Message : Logged in successfully
-     * Data : {"_id":"617bce52771a3d571279e298","username":"DineshDk","password":"123456","user_email":"iddineshkumar@gmail.com","first_name":"","last_name":"","dob":"","contact_number":"","fb_token":"","mobile_type":"Android","delete_status":false,"account_type":"","roll_type":"","parent_code":"127848","parent_of":"","profile_img":"","updatedAt":"2021-10-29T10:34:58.757Z","createdAt":"2021-10-29T10:34:58.757Z","__v":0}
+     * Data : {"_id":"618230269dcc2a290e5bae9a","username":"sriram","password":"654321","user_email":"sriramchanr@gmail.com","first_name":"","last_name":"","dob":"","contact_number":"","fb_token":"","mobile_type":"IOS","delete_status":false,"account_type":"Family","roll_type":"Admin","parent_code":"185779","parent_of":"","profile_img":"","updatedAt":"2021-11-03T06:45:58.980Z","createdAt":"2021-11-03T06:45:58.980Z","__v":0}
      * Code : 200
      */
 
     private String Status;
     private String Message;
     /**
-     * _id : 617bce52771a3d571279e298
-     * username : DineshDk
-     * password : 123456
-     * user_email : iddineshkumar@gmail.com
+     * _id : 618230269dcc2a290e5bae9a
+     * username : sriram
+     * password : 654321
+     * user_email : sriramchanr@gmail.com
      * first_name :
      * last_name :
      * dob :
      * contact_number :
      * fb_token :
-     * mobile_type : Android
+     * mobile_type : IOS
      * delete_status : false
-     * account_type :
-     * roll_type :
-     * parent_code : 127848
+     * account_type : Family
+     * roll_type : Admin
+     * parent_code : 185779
      * parent_of :
      * profile_img :
-     * updatedAt : 2021-10-29T10:34:58.757Z
-     * createdAt : 2021-10-29T10:34:58.757Z
+     * updatedAt : 2021-11-03T06:45:58.980Z
+     * createdAt : 2021-11-03T06:45:58.980Z
      * __v : 0
      */
 

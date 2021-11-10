@@ -27,11 +27,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_20dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
                 <RelativeLayout
@@ -53,7 +54,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:layout_marginTop="@dimen/_60dp"
                         tools:ignore="UselessParent">
 
                         <TextView
@@ -67,7 +67,8 @@
                             android:text="@string/family_account"
                             android:textColor="@color/white"
                             android:textIsSelectable="false"
-                            android:textSize="24sp" />
+                            android:textSize="24sp"
+                            android:layout_marginTop="@dimen/_40dp"/>
 
                         <TextView
                             android:id="@+id/txt_lbl_selectfamlymemb"
@@ -107,10 +108,9 @@
 
                         <Button
                             android:id="@+id/btn_next_step"
-                            android:layout_width="@dimen/_200dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_margin="@dimen/_20dp"
                             android:background="@drawable/rectangle_corner_bg_thicblue"
                             android:drawableEnd="@drawable/icn_arrow_right"
                             android:drawableRight="@drawable/icn_arrow_right"
@@ -119,8 +119,12 @@
                             android:text="@string/next_step"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_20sp"
-                            android:visibility="gone" />
+                            android:textSize="@dimen/_18sp"
+                            android:visibility="gone"
+                            android:layout_marginStart="@dimen/_80dp"
+                            android:layout_marginEnd="@dimen/_80dp"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_marginBottom="@dimen/_20dp"/>
 
                     </LinearLayout>
 

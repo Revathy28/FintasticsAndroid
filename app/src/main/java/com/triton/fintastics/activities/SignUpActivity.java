@@ -101,6 +101,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     boolean can_proceed = true;
     private String emailotp = "";
+    private String accounttype;
 
 
     @Override
@@ -111,8 +112,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         ButterKnife.bind(this);
         avi_indicator.setVisibility(View.GONE);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            accounttype = extras.getString("accounttype");
+        }
+
         btn_verify_email.setOnClickListener(this);
         btn_login.setOnClickListener(this);
+        
     }
 
 
@@ -221,7 +228,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
     public void hideLoading(){
         try {
             alertDialog.dismiss();
@@ -319,7 +325,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     response.body().getData().getUsername(),
                                     response.body().getData().getUser_email(),
                                     response.body().getData().getParent_code(),
-                                    response.body().getData().getPassword()
+                                    response.body().getData().getPassword(),
+                                    response.body().getData().getFirst_name(),
+                                    response.body().getData().getLast_name(),
+                                    response.body().getData().getDob(),
+                                    response.body().getData().getContact_number(),
+                                    response.body().getData().getAccount_type(),
+                                    response.body().getData().getRoll_type()
 
                             );
                             gotoDashboard();
@@ -351,6 +363,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
          * user_email : mohammedimthi2395@gmail.com
          * mobile_type : Android
          * parent_of : 133we
+         * account_type
          */
 
         SignupRequest signupRequest = new SignupRequest();
@@ -359,6 +372,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signupRequest.setUser_email(edt_email.getText().toString().trim());
         signupRequest.setMobile_type("Android");
         signupRequest.setParent_of(refferalcode);
+        signupRequest.setAccount_type(accounttype);
         Log.w(TAG,"signupRequest "+ new Gson().toJson(signupRequest));
         return signupRequest;
     }

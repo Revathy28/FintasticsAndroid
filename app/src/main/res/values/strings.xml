@@ -76,6 +76,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logout">Logout</string>
     <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="are_you_sure_you_want_to_block">Are you sure you want to block user?</string>
+    <string name="are_you_sure_you_want_to_unblock">Are you sure you want to unblock user?</string>
     <string name="on_date">On Date</string>
     <string name="from">From</string>
     <string name="to">To</string>
@@ -85,20 +87,20 @@
     <string name="select_transaction_type">Select Transaction Type</string>
     <string name="total_credit">Total Credit</string>
     <string name="added_credit">Added Credit</string>
-    <string name="_333_27">333.27</string>
-    <string name="_108_4">108.4</string>
+    <string name="_333_27">0</string>
+    <string name="_108_4">0</string>
     <string name="deducted_credit">Deducted Credit</string>
-    <string name="_225_87">225.87</string>
+    <string name="_225_87">0</string>
     <string name="sno">SNo</string>
     <string name="dated">Dated</string>
     <string name="added">Added</string>
     <string name="deduted">Deduted</string>
     <string name="_0_36">0.36</string>
-    <string name="_23_march_2021">23 March 2021</string>
+    <string name="_23_march_2021">date</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
-    <string name="balance_999_00">Balance : 999.00</string>
-    <string name="_5837_00">5837.00 -</string>
+    <string name="balance_999_00">Balance : 00.00</string>
+    <string name="_5837_00">00.00 -</string>
     <string name="_0_00">0.00 +</string>
     <string name="_00_00">0.00</string>
 
@@ -129,13 +131,14 @@
     <string name="debit">Debit</string>
     <string name="_1500_00">1500.00</string>
     <string name="balance">Balance</string>
-    <string name="_43385_00">43385.00</string>
+    <string name="_43385_00">0</string>
     <string name="cedint_rent">Cedint rent</string>
     <string name="_498_10">-$498,10</string>
     <string name="father">Father</string>
     <string name="other">Other</string>
     <string name="mother">Mother</string>
     <string name="create_profile">Create Profile</string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="share_link">Share Link</string>
     <string name="expense">Expense</string>
     <string name="income">Income</string>
@@ -144,11 +147,48 @@
     <string name="semicolon">:</string>
     <string name="seems_there_is_a_connectivity_issue_please_check_your_internet_connection_and_try_again">Seems there is a connectivity issue. Please check your internet connection and try again</string>
     <string name="back_to_login">Back to login</string>
+    <string name="payment_type">Payment Type</string>
+    <string name="date_of_transaction">Date Of Transaction</string>
+    <string name="amount">Amount</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="dd">DD</string>
+    <string name="mm">MM</string>
+    <string name="yyyy">YYYY</string>
+    <string name="err_msg_type_of_paymenttype">Please select payment type</string>
+    <string name="err_msg_type_of_transactiontype">Please select transaction type</string>
+    <string name="err_msg_type_of_desctype">Please select Description</string>
+    <string name="err_msg_type_of_month">Please select month</string>
+    <string name="err_msg_type_of_year">Please select year</string>
+    <string name="no_new_transactions_are_available">No new transactions are available</string>
+    <string name="typeyourmessage">Type Your Message</string>
+    <string name="my_group">My Group</string>
 
     <string-array name="array_name">
         <item>Select</item>
         <item>Income</item>
         <item>Expenditure</item>
+    </string-array>
+
+    <string-array name="array_paymentypename">
+        <item>Select Payment Type</item>
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+
+    <string-array name="array_monthslist">
+        <item>Select Month</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 
 

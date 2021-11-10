@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".expenditurereport.ExpenditureReportShowDataActivity">
 
@@ -102,10 +103,10 @@
                             android:layout_marginBottom="@dimen/_10dp"
                             android:ellipsize="end"
                             android:fontFamily="@font/roboto_medium"
+                            android:maxLines="1"
                             android:text="@string/_333_27"
                             android:textColor="@color/red"
-                            android:textSize="@dimen/_12sp"
-                            android:maxLines="1" />
+                            android:textSize="@dimen/_12sp" />
 
                     </LinearLayout>
 
@@ -143,6 +144,7 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
 
             <TableLayout
                 android:id="@+id/table_heading_layout"
@@ -200,141 +202,13 @@
                 </TableRow>
             </TableLayout>
 
-            <TableLayout
-                android:id="@+id/table_heading_layout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10dp">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/txt_sno"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="0"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/_1"
-                        android:textAlignment="center"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/txt_dated"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="1"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="@string/_23_march_2021"
-                        android:textAlignment="center"
-                        android:textColor="@color/primary" />
-
-                    <TextView
-                        android:id="@+id/txt_added"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="2"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/_0_36"
-                        android:textAlignment="center"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/txt_deducted"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="3"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/_0_36"
-                        android:textAlignment="center"
-                        android:textColor="@color/black" />
-
-                </TableRow>
-            </TableLayout>
-
-            <TableLayout
-                android:id="@+id/table_heading_layout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5dp">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/txt_sno1"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="0"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/_2"
-                        android:textAlignment="center"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/txt_dated1"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="1"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="@string/_23_march_2021"
-                        android:textAlignment="center"
-                        android:textColor="@color/primary" />
-
-                    <TextView
-                        android:id="@+id/txt_added1"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="2"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/_0_36"
-                        android:textAlignment="center"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/txt_deducted1"
-                        style="@style/table_row_item"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35dp"
-                        android:layout_column="3"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/_0_36"
-                        android:textAlignment="center"
-                        android:textColor="@color/black" />
-
-                </TableRow>
-            </TableLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_20dp"
-                android:visibility="gone">
+                android:layout_marginTop="@dimen/_20dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_expenditurereport"
@@ -347,17 +221,15 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/no_data_found"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue"
                     android:textSize="@dimen/_14sp"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
             </RelativeLayout>
 
-
         </LinearLayout>
-
     </ScrollView>
 
     <LinearLayout
@@ -368,5 +240,14 @@
         android:orientation="vertical">
 
     </LinearLayout>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:indicatorColor="@color/blue"
+        app:indicatorName="LineSpinFadeLoaderIndicator" />
+
 
 </RelativeLayout>

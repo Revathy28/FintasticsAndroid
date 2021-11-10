@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_10dp"
+    android:layout_marginBottom="5dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/_20dp"
+        android:layout_marginBottom="@dimen/_10dp"
         app:cardCornerRadius="@dimen/_10dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
@@ -18,7 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_corner_bg_white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/ll_root"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginEnd="@dimen/_10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,11 +36,11 @@
 
                 <TextView
                     android:id="@+id/txt_lbl_sno"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@string/s_no"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/_14sp" />
@@ -66,11 +70,11 @@
 
                 <TextView
                     android:id="@+id/txt_lbl_date"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@string/date"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/_14sp" />
@@ -100,11 +104,11 @@
 
                 <TextView
                     android:id="@+id/txt_lbl_transctype"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@string/transaction_type"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/_14sp" />
@@ -134,11 +138,11 @@
 
                 <TextView
                     android:id="@+id/txt_lbl_desc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@string/description"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/_14sp" />
@@ -164,15 +168,16 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/ll_credit">
 
                 <TextView
                     android:id="@+id/txt_lbl_credit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@string/credit"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/_14sp" />
@@ -199,15 +204,16 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/ll_debit">
 
                 <TextView
                     android:id="@+id/txt_lbl_debit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@string/debit"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/_14sp" />
@@ -233,16 +239,16 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txt_lbl_balance"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@string/balance"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/_14sp" />

@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     RelativeLayout rl_forgetpassword;
 
     private Dialog alertDialog;
+    private String accounttype;
 
 
     @Override
@@ -70,6 +71,11 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         avi_indicator.setVisibility(View.GONE);
         Log.w("Oncreate", TAG);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            accounttype = extras.getString("accounttype");
+        }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent i=new Intent(LoginActivity.this,
                 SignUpActivity.class);
         //Intent is used to switch from one activity to another.
+        i.putExtra("accounttype",accounttype);
 
         startActivity(i);
         //invoke the SecondActivity.
@@ -155,7 +162,13 @@ public class LoginActivity extends AppCompatActivity {
                                     response.body().getData().getUsername(),
                                     response.body().getData().getUser_email(),
                                     response.body().getData().getParent_code(),
-                                    response.body().getData().getPassword()
+                                    response.body().getData().getPassword(),
+                                    response.body().getData().getFirst_name(),
+                                    response.body().getData().getLast_name(),
+                                    response.body().getData().getDob(),
+                                    response.body().getData().getContact_number(),
+                                    response.body().getData().getAccount_type(),
+                                    response.body().getData().getRoll_type()
 
                             );
                             Intent intent = new Intent(LoginActivity.this, DashoardActivity.class);

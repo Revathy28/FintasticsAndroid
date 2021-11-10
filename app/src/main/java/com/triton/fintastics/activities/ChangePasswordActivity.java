@@ -21,9 +21,7 @@ import com.triton.fintastics.R;
 import com.triton.fintastics.api.APIClient;
 import com.triton.fintastics.api.RestApiInterface;
 import com.triton.fintastics.requestpojo.ChangePasswordRequest;
-import com.triton.fintastics.requestpojo.SignupRequest;
 import com.triton.fintastics.responsepojo.SignupResponse;
-import com.triton.fintastics.responsepojo.SuccessResponse;
 import com.triton.fintastics.sessionmanager.SessionManager;
 import com.triton.fintastics.utils.ConnectionDetector;
 import com.triton.fintastics.utils.RestUtils;
@@ -40,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChangePasswordActivity extends AppCompatActivity {
-    private String TAG = "ChangePasswordActivity";
+    private final String TAG = "ChangePasswordActivity";
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.include_header)
@@ -68,7 +66,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     String userid;
     String password;
-    private Dialog alertDialog;
+    Dialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,19 +88,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
         TextView txt_title = include_header.findViewById(R.id.txt_title);
         txt_title.setText(getResources().getString(R.string.change_password));
 
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        img_back.setOnClickListener(view -> onBackPressed());
 
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changePasswordValidator();
-            }
-        });
+        btn_save.setOnClickListener(view -> changePasswordValidator());
     }
 
 
@@ -176,7 +164,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     response.body().getData().getUsername(),
                                     response.body().getData().getUser_email(),
                                     response.body().getData().getParent_code(),
-                                    response.body().getData().getPassword()
+                                    response.body().getData().getPassword(),
+                                    response.body().getData().getFirst_name(),
+                                    response.body().getData().getLast_name(),
+                                    response.body().getData().getDob(),
+                                    response.body().getData().getContact_number(),
+                                    response.body().getData().getAccount_type(),
+                                    response.body().getData().getRoll_type()
 
                             );
                            
@@ -214,7 +208,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         Log.w(TAG,"changePasswordRequest "+ new Gson().toJson(changePasswordRequest));
         return changePasswordRequest;
     }
-
     public void showErrorLoading(String errormesage){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(errormesage);
@@ -227,7 +220,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
     public void hideLoading(){
         try {
             alertDialog.dismiss();
