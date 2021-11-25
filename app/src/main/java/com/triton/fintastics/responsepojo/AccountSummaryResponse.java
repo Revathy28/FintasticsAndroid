@@ -7,43 +7,41 @@ public class AccountSummaryResponse {
     /**
      * Status : Success
      * Message : account summery  data
-     * Data : [{"_id":"618234a0ecb5dd2ce6542c40","transaction_date":"02-11-2021 12:35 PM","transaction_type":"Card","transaction_desc":"card","transaction_way":"Credit","transaction_amount":500,"transaction_balance":500,"system_date":"2021-11-02T00:00:00.000Z","user_id":"618230269dcc2a290e5bae9a","parent_code":"185779","delete_status":false,"updatedAt":"2021-11-03T07:05:04.622Z","createdAt":"2021-11-03T07:05:04.622Z","__v":0},{"_id":"61828a96709a6c7f3c0107b7","transaction_date":"03-11-2021 06:41 PM","transaction_type":"Card","transaction_desc":"salary ","transaction_way":"Credit","transaction_amount":1000,"transaction_balance":1500,"system_date":"2021-11-03T00:00:00.000Z","user_id":"618230269dcc2a290e5bae9a","parent_code":"","delete_status":false,"updatedAt":"2021-11-03T13:11:50.922Z","createdAt":"2021-11-03T13:11:50.922Z","__v":0},{"_id":"61828ca7709a6c7f3c0107d5","transaction_date":"02-11-2021 12:00 AM","transaction_type":"Card","transaction_desc":"salary ","transaction_way":"Credit","transaction_amount":1000,"transaction_balance":2500,"system_date":"2021-11-02T00:00:00.000Z","user_id":"618230269dcc2a290e5bae9a","parent_code":"","delete_status":false,"updatedAt":"2021-11-03T13:20:39.174Z","createdAt":"2021-11-03T13:20:39.174Z","__v":0},{"_id":"61828ccf709a6c7f3c0107df","transaction_date":"01-11-2021 12:00 AM","transaction_type":"Cash","transaction_desc":"Salary ","transaction_way":"Credit","transaction_amount":21556,"transaction_balance":24056,"system_date":"2021-11-01T00:00:00.000Z","user_id":"618230269dcc2a290e5bae9a","parent_code":"","delete_status":false,"updatedAt":"2021-11-03T13:21:19.098Z","createdAt":"2021-11-03T13:21:19.098Z","__v":0},{"_id":"6184de5184ce1b335fa082f2","transaction_date":"05-11-2021 01:03 PM","transaction_type":"Cash","transaction_desc":"test","transaction_way":"Debit","transaction_amount":100,"transaction_balance":23956,"system_date":"2021-11-05T00:00:00.000Z","user_id":"618230269dcc2a290e5bae9a","parent_code":"","delete_status":false,"updatedAt":"2021-11-05T07:33:37.363Z","createdAt":"2021-11-05T07:33:37.363Z","__v":0}]
-     * balance : {"Credit_amount":24056,"Debit_amount":100,"Balance_amount":23956}
-     * user_count : {"child_count":3,"admin_count":1,"total_count":4}
+     * Data : [{"_id":"619ddf4deb21392006e8c176","transaction_date":"24-11-2021 12:14 pm","transaction_type":"Cash","transaction_desc":"Online","transaction_way":"Credit","transaction_amount":1000,"transaction_balance":1000,"system_date":"2021-11-24T00:00:00.000Z","user_id":"619ddf3deb21392006e8c169","parent_code":"465603","delete_status":false,"updatedAt":"2021-11-24T06:44:29.415Z","createdAt":"2021-11-24T06:44:29.415Z","__v":0},{"_id":"619ddf5feb21392006e8c183","transaction_date":"24-11-2021 12:14 pm","transaction_type":"Cash","transaction_desc":"Online","transaction_way":"Debit","transaction_amount":500,"transaction_balance":500,"system_date":"2021-11-24T00:00:00.000Z","user_id":"619ddf3deb21392006e8c169","parent_code":"465603","delete_status":false,"updatedAt":"2021-11-24T06:44:47.639Z","createdAt":"2021-11-24T06:44:47.639Z","__v":0},{"_id":"619ddf6feb21392006e8c18f","transaction_date":"22-11-2021 12:15 pm","transaction_type":"Cash","transaction_desc":"Cash Desk","transaction_way":"Credit","transaction_amount":100,"transaction_balance":600,"system_date":"2021-11-22T00:00:00.000Z","user_id":"619ddf3deb21392006e8c169","parent_code":"465603","delete_status":false,"updatedAt":"2021-11-24T06:45:03.175Z","createdAt":"2021-11-24T06:45:03.175Z","__v":0},{"_id":"619ddf82eb21392006e8c19b","transaction_date":"23-11-2021 12:15 pm","transaction_type":"Cash","transaction_desc":"Online","transaction_way":"Debit","transaction_amount":200,"transaction_balance":400,"system_date":"2021-11-23T00:00:00.000Z","user_id":"619ddf3deb21392006e8c169","parent_code":"465603","delete_status":false,"updatedAt":"2021-11-24T06:45:22.673Z","createdAt":"2021-11-24T06:45:22.673Z","__v":0},{"_id":"619df2f6ba8c683ca931643f","transaction_date":"22-11-2021 12:00 AM","transaction_type":"Cash","transaction_desc":"Cash Desk","transaction_way":"Debit","transaction_amount":100,"transaction_balance":300,"system_date":"2021-11-22T00:00:00.000Z","user_id":"619ddf3deb21392006e8c169","parent_code":"","delete_status":false,"updatedAt":"2021-11-24T08:08:22.308Z","createdAt":"2021-11-24T08:08:22.308Z","__v":0},{"_id":"619e03bcba8c683ca93164b4","transaction_date":"24-11-2021 02:49 PM","transaction_type":"Cash","transaction_desc":"Cash Desk","transaction_way":"Credit","transaction_amount":1000,"transaction_balance":1300,"system_date":"2021-11-24T00:00:00.000Z","user_id":"619ddf3deb21392006e8c169","parent_code":"","delete_status":false,"updatedAt":"2021-11-24T09:19:56.641Z","createdAt":"2021-11-24T09:19:56.641Z","__v":0},{"_id":"619e055eba8c683ca93164db","transaction_date":"24-11-2021 02:56 PM","transaction_type":"Card","transaction_desc":"Online","transaction_way":"Credit","transaction_amount":100,"transaction_balance":1400,"system_date":"2021-11-24T00:00:00.000Z","user_id":"619ddf3deb21392006e8c169","parent_code":"","delete_status":false,"updatedAt":"2021-11-24T09:26:54.218Z","createdAt":"2021-11-24T09:26:54.218Z","__v":0}]
+     * balance : {"Credit_amount":2200,"Debit_amount":800,"Balance_amount":1400}
+     * user_count : {"total_count":0}
      * Code : 200
      */
 
     private String Status;
     private String Message;
     /**
-     * Credit_amount : 24056
-     * Debit_amount : 100
-     * Balance_amount : 23956
+     * Credit_amount : 2200
+     * Debit_amount : 800
+     * Balance_amount : 1400
      */
 
     private BalanceBean balance;
     /**
-     * child_count : 3
-     * admin_count : 1
-     * total_count : 4
+     * total_count : 0
      */
 
     private UserCountBean user_count;
     private int Code;
     /**
-     * _id : 618234a0ecb5dd2ce6542c40
-     * transaction_date : 02-11-2021 12:35 PM
-     * transaction_type : Card
-     * transaction_desc : card
+     * _id : 619ddf4deb21392006e8c176
+     * transaction_date : 24-11-2021 12:14 pm
+     * transaction_type : Cash
+     * transaction_desc : Online
      * transaction_way : Credit
-     * transaction_amount : 500
-     * transaction_balance : 500
-     * system_date : 2021-11-02T00:00:00.000Z
-     * user_id : 618230269dcc2a290e5bae9a
-     * parent_code : 185779
+     * transaction_amount : 1000
+     * transaction_balance : 1000
+     * system_date : 2021-11-24T00:00:00.000Z
+     * user_id : 619ddf3deb21392006e8c169
+     * parent_code : 465603
      * delete_status : false
-     * updatedAt : 2021-11-03T07:05:04.622Z
-     * createdAt : 2021-11-03T07:05:04.622Z
+     * updatedAt : 2021-11-24T06:44:29.415Z
+     * createdAt : 2021-11-24T06:44:29.415Z
      * __v : 0
      */
 
@@ -128,25 +126,7 @@ public class AccountSummaryResponse {
     }
 
     public static class UserCountBean {
-        private int child_count;
-        private int admin_count;
         private int total_count;
-
-        public int getChild_count() {
-            return child_count;
-        }
-
-        public void setChild_count(int child_count) {
-            this.child_count = child_count;
-        }
-
-        public int getAdmin_count() {
-            return admin_count;
-        }
-
-        public void setAdmin_count(int admin_count) {
-            this.admin_count = admin_count;
-        }
 
         public int getTotal_count() {
             return total_count;

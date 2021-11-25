@@ -43,6 +43,7 @@ import com.triton.fintastics.requestpojo.DashboardDataRequest;
 import com.triton.fintastics.responsepojo.DashboardDataResponse;
 import com.triton.fintastics.sessionmanager.SessionManager;
 import com.triton.fintastics.transaction.AddTransactionActivity;
+import com.triton.fintastics.transaction.VoiceAddTransactionActivity;
 import com.triton.fintastics.transactionreport.TranscationReportActivity;
 import com.triton.fintastics.utils.RestUtils;
 
@@ -215,6 +216,14 @@ public class DashboardNavigationDrawer extends AppCompatActivity implements View
                     gotoChat();
                     return true;
 
+                case R.id.nav_item_ten:
+                    gotoEditprofile();
+                    return true;
+
+                case R.id.nav_item_eleventh:
+                    showLogOutAppAlert();
+                    return true;
+
 
 
 
@@ -227,6 +236,9 @@ public class DashboardNavigationDrawer extends AppCompatActivity implements View
 
     }
 
+    private void gotoEditprofile() {
+        startActivity(new Intent(getApplicationContext(),EditProfileActivity.class));
+    }
 
 
     private void initToolBar(View view) {
@@ -338,7 +350,8 @@ public class DashboardNavigationDrawer extends AppCompatActivity implements View
 
     }
     private void gotoAddTransaction() {
-        startActivity(new Intent(getApplicationContext(), AddTransactionActivity.class));
+        startActivity(new Intent(getApplicationContext(), VoiceAddTransactionActivity.class));
+        //startActivity(new Intent(getApplicationContext(), AddTransactionActivity.class));
 
     }
 

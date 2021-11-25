@@ -55,13 +55,19 @@ public class AccountSummaryListAdapter extends  RecyclerView.Adapter<RecyclerVie
            holder.txt_balance.setText("\u20B9 " +"0");
        }
 
+        if(currentItem.getTransaction_date() != null && !currentItem.getTransaction_date().isEmpty()){
+            holder.txt_transaction_date.setText(currentItem.getTransaction_date());
+        }else{
+            holder.txt_transaction_date.setText("");
+        }
+
         if(currentItem.getTransaction_way() != null && currentItem.getTransaction_way().equalsIgnoreCase("Credit")){
             if(currentItem.getTransaction_amount() != 0) {
-                holder.txt_credit.setText("\u20B9 " +currentItem.getTransaction_amount()+" + ");
-                holder.txt_debit.setText("\u20B9 " +"0 -");
+                holder.txt_credit.setText("\u20B9 " +" + "+currentItem.getTransaction_amount());
+                holder.txt_debit.setText("\u20B9 " +"- 0");
             }else{
-                holder.txt_credit.setText("\u20B9 " +"0"+" + ");
-                holder.txt_debit.setText("\u20B9 " +"0 -");
+                holder.txt_credit.setText("\u20B9 " +"+ 0");
+                holder.txt_debit.setText("\u20B9 " +"- 0");
             }
 
 
@@ -69,11 +75,11 @@ public class AccountSummaryListAdapter extends  RecyclerView.Adapter<RecyclerVie
 
         if(currentItem.getTransaction_way() != null && currentItem.getTransaction_way().equalsIgnoreCase("Debit")){
             if(currentItem.getTransaction_amount() != 0) {
-                 holder.txt_debit.setText("\u20B9 " +currentItem.getTransaction_amount()+" - ");
-                 holder.txt_credit.setText("\u20B9 " +"0 +");
+                 holder.txt_debit.setText("\u20B9 "+" - " +currentItem.getTransaction_amount());
+                 holder.txt_credit.setText("\u20B9 " +"+ 0");
              }else{
-                holder.txt_debit.setText("\u20B9 " +"0"+" - ");
-                holder.txt_credit.setText("\u20B9 " +"0 +");
+                holder.txt_debit.setText("\u20B9 " +"- 0");
+                holder.txt_credit.setText("\u20B9 " +"+ 0");
             }
          }
 
@@ -90,6 +96,7 @@ public class AccountSummaryListAdapter extends  RecyclerView.Adapter<RecyclerVie
             holder.txt_credit.setTextColor(context.getResources().getColor(R.color.white));
             holder.txt_debit.setTextColor(context.getResources().getColor(R.color.white));
             holder.txt_transctype.setTextColor(context.getResources().getColor(R.color.white));
+            holder.txt_transaction_date.setTextColor(context.getResources().getColor(R.color.white));
 
         }
 
@@ -117,7 +124,7 @@ public class AccountSummaryListAdapter extends  RecyclerView.Adapter<RecyclerVie
     }
 
     static class ViewHolderOne extends RecyclerView.ViewHolder {
-        public TextView txt_balance,txt_debit,txt_credit,txt_transctype;
+        public TextView txt_balance,txt_debit,txt_credit,txt_transctype,txt_transaction_date;
         public LinearLayout ll_root;
 
         public ViewHolderOne(View itemView) {
@@ -126,6 +133,7 @@ public class AccountSummaryListAdapter extends  RecyclerView.Adapter<RecyclerVie
             txt_debit = itemView.findViewById(R.id.txt_debit);
             txt_credit = itemView.findViewById(R.id.txt_credit);
             txt_transctype = itemView.findViewById(R.id.txt_transctype);
+            txt_transaction_date = itemView.findViewById(R.id.txt_transaction_date);
             ll_root = itemView.findViewById(R.id.ll_root);
 
 

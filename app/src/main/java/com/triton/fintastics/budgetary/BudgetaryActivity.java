@@ -69,6 +69,10 @@ public class BudgetaryActivity extends AppCompatActivity {
     @BindView(R.id.rv_transaction)
     RecyclerView rv_transaction;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.stackedbarchart)
+    StackedBarChart mStackedBarChart;
+
     private String user_id;
 
 
@@ -88,86 +92,6 @@ public class BudgetaryActivity extends AppCompatActivity {
         ImageView img_back = include_header.findViewById(R.id.img_back);
         TextView txt_title = include_header.findViewById(R.id.txt_title);
         txt_title.setText(getResources().getString(R.string.budgetary));
-
-
-        StackedBarChart mStackedBarChart = (StackedBarChart) findViewById(R.id.stackedbarchart);
-
-        StackedBarModel s1 = new StackedBarModel("J");
-
-        s1.addBar(new BarModel(2.3f, 0xFF63CBB0));
-        s1.addBar(new BarModel(2.3f, 0xFF56B7F1));
-        s1.addBar(new BarModel(2.3f, 0xFFCDA67F));
-
-        StackedBarModel s2 = new StackedBarModel("F");
-        s2.addBar(new BarModel(1.1f, 0xFF63CBB0));
-        s2.addBar(new BarModel(2.7f, 0xFF56B7F1));
-        s2.addBar(new BarModel(0.7f, 0xFFCDA67F));
-
-        StackedBarModel s3 = new StackedBarModel("M");
-
-        s3.addBar(new BarModel(2.3f, 0xFF63CBB0));
-        s3.addBar(new BarModel(2.f, 0xFF56B7F1));
-        s3.addBar(new BarModel(3.3f, 0xFFCDA67F));
-
-        StackedBarModel s4 = new StackedBarModel("A");
-        s4.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s4.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s4.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s5 = new StackedBarModel("M");
-        s5.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s5.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s5.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s6 = new StackedBarModel("J");
-        s6.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s6.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s6.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s7 = new StackedBarModel("J");
-        s7.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s7.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s7.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s8 = new StackedBarModel("A");
-        s8.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s8.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s8.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s9 = new StackedBarModel("S");
-        s9.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s9.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s9.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s10 = new StackedBarModel("O");
-        s10.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s10.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s10.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s11 = new StackedBarModel("N");
-        s11.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s11.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s11.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-        StackedBarModel s12 = new StackedBarModel("D");
-        s12.addBar(new BarModel(1.f, 0xFF63CBB0));
-        s12.addBar(new BarModel(4.2f, 0xFF56B7F1));
-        s12.addBar(new BarModel(2.1f, 0xFFCDA67F));
-
-
-
-        mStackedBarChart.addBar(s1);
-        mStackedBarChart.addBar(s2);
-        mStackedBarChart.addBar(s3);
-        mStackedBarChart.addBar(s4);
-        mStackedBarChart.addBar(s5);
-        mStackedBarChart.addBar(s6);
-        mStackedBarChart.addBar(s7);
-        mStackedBarChart.addBar(s8);
-        mStackedBarChart.addBar(s9);
-        mStackedBarChart.addBar(s10);
-        mStackedBarChart.addBar(s11);
-        mStackedBarChart.addBar(s12);
 
         if(user_id != null){
             budgetGetlistRequestCall();
@@ -222,6 +146,143 @@ public class BudgetaryActivity extends AppCompatActivity {
 
                         if(response.body().getData().getExpensive_data() != null && response.body().getData().getExpensive_data().size()>0){
                             setExpenseListView(response.body().getData().getExpensive_data());
+                        }
+
+                        if(response.body().getData().getIncome_data() != null && response.body().getData().getIncome_data().size()>0){
+
+                            try {
+
+                                int income_amountJan = response.body().getData().getIncome_data().get(0).getIncome_amount();
+                                int available_amountJan = response.body().getData().getIncome_data().get(0).getAvailable_amount();
+                                int spend_amountJan = response.body().getData().getIncome_data().get(0).getSpend_amount();
+
+                                int income_amountFeb = response.body().getData().getIncome_data().get(1).getIncome_amount();
+                                int available_amountFeb = response.body().getData().getIncome_data().get(1).getAvailable_amount();
+                                int spend_amountFeb = response.body().getData().getIncome_data().get(1).getSpend_amount();
+
+                                int income_amountMar = response.body().getData().getIncome_data().get(2).getIncome_amount();
+                                int available_amountMar = response.body().getData().getIncome_data().get(2).getAvailable_amount();
+                                int spend_amountMar = response.body().getData().getIncome_data().get(2).getSpend_amount();
+
+                                int income_amountApr = response.body().getData().getIncome_data().get(3).getIncome_amount();
+                                int available_amountApr = response.body().getData().getIncome_data().get(3).getAvailable_amount();
+                                int spend_amountApr = response.body().getData().getIncome_data().get(3).getSpend_amount();
+
+                                int income_amountMay = response.body().getData().getIncome_data().get(4).getIncome_amount();
+                                int available_amountMay = response.body().getData().getIncome_data().get(4).getAvailable_amount();
+                                int spend_amountMay = response.body().getData().getIncome_data().get(4).getSpend_amount();
+
+                                int income_amountJun = response.body().getData().getIncome_data().get(5).getIncome_amount();
+                                int available_amountJun = response.body().getData().getIncome_data().get(5).getAvailable_amount();
+                                int spend_amountJun = response.body().getData().getIncome_data().get(5).getSpend_amount();
+
+                                int income_amountJul = response.body().getData().getIncome_data().get(6).getIncome_amount();
+                                int available_amountJul = response.body().getData().getIncome_data().get(6).getAvailable_amount();
+                                int spend_amountJul = response.body().getData().getIncome_data().get(6).getSpend_amount();
+
+                                int income_amountAug = response.body().getData().getIncome_data().get(7).getIncome_amount();
+                                int available_amountAug = response.body().getData().getIncome_data().get(7).getAvailable_amount();
+                                int spend_amountAug = response.body().getData().getIncome_data().get(7).getSpend_amount();
+
+                                int income_amountSep = response.body().getData().getIncome_data().get(8).getIncome_amount();
+                                int available_amountSep = response.body().getData().getIncome_data().get(8).getAvailable_amount();
+                                int spend_amountSep = response.body().getData().getIncome_data().get(8).getSpend_amount();
+
+                                int income_amountOct = response.body().getData().getIncome_data().get(9).getIncome_amount();
+                                int available_amountOct = response.body().getData().getIncome_data().get(9).getAvailable_amount();
+                                int spend_amountOct = response.body().getData().getIncome_data().get(9).getSpend_amount();
+
+                                int income_amountNov = response.body().getData().getIncome_data().get(10).getIncome_amount();
+                                int available_amountNov = response.body().getData().getIncome_data().get(10).getAvailable_amount();
+                                int spend_amountNov = response.body().getData().getIncome_data().get(10).getSpend_amount();
+
+                                int income_amountDec = response.body().getData().getIncome_data().get(11).getIncome_amount();
+                                int available_amountDec = response.body().getData().getIncome_data().get(11).getAvailable_amount();
+                                int spend_amountDec = response.body().getData().getIncome_data().get(11).getSpend_amount();
+
+
+                                StackedBarModel s1 = new StackedBarModel("J");
+                                s1.addBar(new BarModel(income_amountJan, 0xFF63CBB0));
+                                s1.addBar(new BarModel(available_amountJan, 0xFF56B7F1));
+                                s1.addBar(new BarModel(spend_amountJan, 0xFFCDA67F));
+
+                                StackedBarModel s2 = new StackedBarModel("F");
+                                s2.addBar(new BarModel(income_amountFeb, 0xFF63CBB0));
+                                s2.addBar(new BarModel(available_amountFeb, 0xFF56B7F1));
+                                s2.addBar(new BarModel(spend_amountFeb, 0xFFCDA67F));
+
+                                StackedBarModel s3 = new StackedBarModel("M");
+                                s3.addBar(new BarModel(income_amountMar, 0xFF63CBB0));
+                                s3.addBar(new BarModel(available_amountMar, 0xFF56B7F1));
+                                s3.addBar(new BarModel(spend_amountMar, 0xFFCDA67F));
+
+                                StackedBarModel s4 = new StackedBarModel("A");
+                                s4.addBar(new BarModel(income_amountApr, 0xFF63CBB0));
+                                s4.addBar(new BarModel(available_amountApr, 0xFF56B7F1));
+                                s4.addBar(new BarModel(spend_amountApr, 0xFFCDA67F));
+
+                                StackedBarModel s5 = new StackedBarModel("M");
+                                s5.addBar(new BarModel(income_amountMay, 0xFF63CBB0));
+                                s5.addBar(new BarModel(available_amountMay, 0xFF56B7F1));
+                                s5.addBar(new BarModel(spend_amountMay, 0xFFCDA67F));
+
+                                StackedBarModel s6 = new StackedBarModel("J");
+                                s6.addBar(new BarModel(income_amountJun, 0xFF63CBB0));
+                                s6.addBar(new BarModel(available_amountJun, 0xFF56B7F1));
+                                s6.addBar(new BarModel(spend_amountJun, 0xFFCDA67F));
+
+                                StackedBarModel s7 = new StackedBarModel("J");
+                                s7.addBar(new BarModel(income_amountJul, 0xFF63CBB0));
+                                s7.addBar(new BarModel(available_amountJul, 0xFF56B7F1));
+                                s7.addBar(new BarModel(spend_amountJul, 0xFFCDA67F));
+
+                                StackedBarModel s8 = new StackedBarModel("A");
+                                s8.addBar(new BarModel(income_amountAug, 0xFF63CBB0));
+                                s8.addBar(new BarModel(available_amountAug, 0xFF56B7F1));
+                                s8.addBar(new BarModel(spend_amountAug, 0xFFCDA67F));
+
+                                StackedBarModel s9 = new StackedBarModel("S");
+                                s9.addBar(new BarModel(income_amountSep, 0xFF63CBB0));
+                                s9.addBar(new BarModel(available_amountSep, 0xFF56B7F1));
+                                s9.addBar(new BarModel(spend_amountSep, 0xFFCDA67F));
+
+                                StackedBarModel s10 = new StackedBarModel("O");
+                                s10.addBar(new BarModel(income_amountOct, 0xFF63CBB0));
+                                s10.addBar(new BarModel(available_amountOct, 0xFF56B7F1));
+                                s10.addBar(new BarModel(spend_amountOct, 0xFFCDA67F));
+
+                                StackedBarModel s11 = new StackedBarModel("N");
+                                s11.addBar(new BarModel(income_amountNov, 0xFF63CBB0));
+                                s11.addBar(new BarModel(available_amountNov, 0xFF56B7F1));
+                                s11.addBar(new BarModel(spend_amountNov, 0xFFCDA67F));
+
+                                StackedBarModel s12 = new StackedBarModel("D");
+                                s12.addBar(new BarModel(income_amountDec, 0xFF63CBB0));
+                                s12.addBar(new BarModel(available_amountDec, 0xFF56B7F1));
+                                s12.addBar(new BarModel(spend_amountDec, 0xFFCDA67F));
+
+                                mStackedBarChart.addBar(s1);
+                                mStackedBarChart.addBar(s2);
+                                mStackedBarChart.addBar(s3);
+                                mStackedBarChart.addBar(s4);
+                                mStackedBarChart.addBar(s5);
+                                mStackedBarChart.addBar(s6);
+                                mStackedBarChart.addBar(s7);
+                                mStackedBarChart.addBar(s8);
+                                mStackedBarChart.addBar(s9);
+                                mStackedBarChart.addBar(s10);
+                                mStackedBarChart.addBar(s11);
+                                mStackedBarChart.addBar(s12);
+
+                            }
+                            catch (IndexOutOfBoundsException indexOutOfBoundsException){
+                               indexOutOfBoundsException.printStackTrace();
+                            }
+
+
+
+
+
                         }
 
 

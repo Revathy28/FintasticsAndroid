@@ -363,7 +363,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
          * user_email : mohammedimthi2395@gmail.com
          * mobile_type : Android
          * parent_of : 133we
-         * account_type
+         * account_type:
          */
 
         SignupRequest signupRequest = new SignupRequest();

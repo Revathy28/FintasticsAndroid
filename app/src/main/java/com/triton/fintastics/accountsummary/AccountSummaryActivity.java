@@ -51,8 +51,8 @@ public class AccountSummaryActivity extends AppCompatActivity {
     TextView txt_no_records;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_balance)
-    TextView txt_balance;
+    @BindView(R.id.txt_available_balance)
+    TextView txt_available_balance;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.txt_debit)
@@ -123,7 +123,7 @@ public class AccountSummaryActivity extends AppCompatActivity {
                         }
 
                         if(response.body().getBalance() != null){
-                            txt_balance.setText("\u20B9 " +response.body().getBalance().getBalance_amount());
+                            txt_available_balance.setText("\u20B9 " +response.body().getBalance().getBalance_amount());
                             txt_debit.setText("\u20B9 " +response.body().getBalance().getDebit_amount());
                             txt_credit.setText("\u20B9 " +response.body().getBalance().getCredit_amount());
                         }

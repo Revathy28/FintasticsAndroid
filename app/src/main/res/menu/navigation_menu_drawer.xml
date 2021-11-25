@@ -57,6 +57,18 @@
             android:title="@string/chat"
             android:visible="true"/>
 
+                <item
+                    android:id="@+id/nav_item_ten"
+                    android:icon="@drawable/icn_family"
+                    android:title="@string/edit_profile"
+                    />
+
+                <item
+                    android:id="@+id/nav_item_eleventh"
+                    android:icon="@drawable/logout"
+                    android:title="@string/logout"
+                    />
+
             </menu>
 
         </item>

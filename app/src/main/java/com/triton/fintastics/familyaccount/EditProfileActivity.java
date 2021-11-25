@@ -141,6 +141,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
        String firstname = user.get(SessionManager.KEY_FIRSTNAME);
        String lastname = user.get(SessionManager.KEY_LASTNAME);
+        String username = user.get(SessionManager.KEY_USERNAME);
        SelectedDOBddate = user.get(SessionManager.KEY_DOB);
        String emailid = user.get(SessionManager.KEY_EMAIL_ID);
        String contactnumber = user.get(SessionManager.KEY_CONTACTNUMBER);
@@ -182,8 +183,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
        }
 
-       if(firstname != null){
-           edt_firstname.setText(firstname);
+       if(username != null){
+           edt_firstname.setText(username);
        }
         if(lastname != null){
             edt_lastname.setText(lastname);

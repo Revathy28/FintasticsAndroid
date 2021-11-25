@@ -41,8 +41,9 @@
     <!-- Create Profile Screen-->
     <string name="save">Save</string>
     <string name="first_name">First Name</string>
+    <string name="user_name">User Name</string>
     <string name="last_name">Last Name</string>
-    <string name="email_id">Email Id</string>
+    <string name="email_id">Email ID</string>
     <string name="contact_no">Contact Number</string>
     <string name="dob">Date Of Birth</string>
 
@@ -91,7 +92,7 @@
     <string name="_108_4">0</string>
     <string name="deducted_credit">Deducted Credit</string>
     <string name="_225_87">0</string>
-    <string name="sno">SNo</string>
+    <string name="sno">S.No</string>
     <string name="dated">Dated</string>
     <string name="added">Added</string>
     <string name="deduted">Deduted</string>
@@ -162,6 +163,8 @@
     <string name="no_new_transactions_are_available">No new transactions are available</string>
     <string name="typeyourmessage">Type Your Message</string>
     <string name="my_group">My Group</string>
+    <string name="available_balance">Available Balance</string>
+
 
     <string-array name="array_name">
         <item>Select</item>

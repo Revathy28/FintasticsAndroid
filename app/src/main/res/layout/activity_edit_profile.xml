@@ -85,7 +85,7 @@
                 android:layout_marginTop="@dimen/_10dp"
                 android:fontFamily="@font/roboto_medium"
                 android:padding="@dimen/_5dp"
-                android:text="@string/first_name"
+                android:text="@string/user_name"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/_16sp" />
 
@@ -115,7 +115,8 @@
                 android:padding="@dimen/_5dp"
                 android:text="@string/last_name"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/_16sp" />
+                android:textSize="@dimen/_16sp"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/edt_lastname"
@@ -132,7 +133,8 @@
                 android:textColor="@color/txt_black"
                 android:textColorHint="@color/hint_color"
                 android:textSize="16sp"
-                tools:ignore="Autofill,LabelFor" />
+                tools:ignore="Autofill,LabelFor"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/txt_lbl_dob"

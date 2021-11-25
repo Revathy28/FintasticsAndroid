@@ -61,6 +61,8 @@ public class IncomeReportListAdapter extends  RecyclerView.Adapter<RecyclerView.
            holder.txt_added.setText("\u20B9 " +"0");
        }
 
+       holder.txt_deducted.setVisibility(View.GONE);
+
         if(currentItem.getDebit_amount() != 0) {
             holder.txt_deducted.setText("\u20B9 " +currentItem.getDebit_amount());
         }else{

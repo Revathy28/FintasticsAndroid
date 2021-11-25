@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.triton.fintastics.R;
 import com.triton.fintastics.adapter.IncomeReportListAdapter;
+import com.triton.fintastics.adapter.MovementReportListAdapter;
 import com.triton.fintastics.api.APIClient;
 import com.triton.fintastics.api.RestApiInterface;
 import com.triton.fintastics.requestpojo.MovementReportDataRequest;
@@ -29,7 +30,7 @@ import retrofit2.Response;
 
 public class MovementListShowDataActivity extends AppCompatActivity {
 
-    private final String TAG = "MovementListShowDataActivity";
+      String TAG = "MovementListShowDataActivity";
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.include_header)
@@ -48,16 +49,16 @@ public class MovementListShowDataActivity extends AppCompatActivity {
     TextView txt_no_records;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_credit_value)
-    TextView txt_credit_value;
+    @BindView(R.id.txt_available_balance)
+    TextView txt_available_balance;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_added_credit)
-    TextView txt_added_credit;
+    @BindView(R.id.txt_debit)
+    TextView txt_debit;
 
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_deducted_credit)
-    TextView txt_deducted_credit;
+    @BindView(R.id.txt_credit)
+    TextView txt_credit;
 
 
     private String user_id;
@@ -126,9 +127,9 @@ public class MovementListShowDataActivity extends AppCompatActivity {
                         }
 
                         if(response.body().getTotal_count() != null){
-                            txt_added_credit.setText("\u20B9 " +response.body().getTotal_count().getAvailable_balance());
-                            txt_credit_value.setText("\u20B9 " +response.body().getTotal_count().getTotal_credit_value());
-                            txt_deducted_credit.setText("\u20B9 " +response.body().getTotal_count().getTotal_debit_value());
+                            txt_available_balance.setText("\u20B9 " +response.body().getTotal_count().getAvailable_balance());
+                            txt_credit.setText("\u20B9 " +response.body().getTotal_count().getTotal_credit_value());
+                            txt_debit.setText("\u20B9 " +response.body().getTotal_count().getTotal_debit_value());
                         }
 
                     }
@@ -164,8 +165,8 @@ public class MovementListShowDataActivity extends AppCompatActivity {
     private void setMovementReportListView(List<IncomeReportResponse.DataBean> data) {
         rv_expenditurereport.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rv_expenditurereport.setItemAnimator(new DefaultItemAnimator());
-        IncomeReportListAdapter incomeReportListAdapter = new IncomeReportListAdapter(getApplicationContext(), data);
-        rv_expenditurereport.setAdapter(incomeReportListAdapter);
+        MovementReportListAdapter movementReportListAdapter = new MovementReportListAdapter(getApplicationContext(), data);
+        rv_expenditurereport.setAdapter(movementReportListAdapter);
 
     }
 }

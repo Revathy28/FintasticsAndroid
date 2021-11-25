@@ -66,7 +66,8 @@ public class BudgetGetlistResponse {
          */
 
         private List<ExpensiveDataBean> expensive_data;
-        private List<?> income_data;
+        private List<IncomeDataBean> income_data;
+
 
         public int getExpend_value() {
             return expend_value;
@@ -92,13 +93,16 @@ public class BudgetGetlistResponse {
             this.expensive_data = expensive_data;
         }
 
-        public List<?> getIncome_data() {
+        public List<IncomeDataBean> getIncome_data() {
             return income_data;
         }
 
-        public void setIncome_data(List<?> income_data) {
+        public void setIncome_data(List<IncomeDataBean> income_data) {
             this.income_data = income_data;
         }
+
+
+
 
         public static class ExpensiveDataBean {
             private String _id;
@@ -127,6 +131,35 @@ public class BudgetGetlistResponse {
 
             public void setPercentage(double percentage) {
                 this.percentage = percentage;
+            }
+        }
+        public static class IncomeDataBean {
+            private int spend_amount;
+            private int income_amount;
+            private int available_amount;
+
+            public int getSpend_amount() {
+                return spend_amount;
+            }
+
+            public void setSpend_amount(int spend_amount) {
+                this.spend_amount = spend_amount;
+            }
+
+            public int getIncome_amount() {
+                return income_amount;
+            }
+
+            public void setIncome_amount(int income_amount) {
+                this.income_amount = income_amount;
+            }
+
+            public int getAvailable_amount() {
+                return available_amount;
+            }
+
+            public void setAvailable_amount(int available_amount) {
+                this.available_amount = available_amount;
             }
         }
     }
