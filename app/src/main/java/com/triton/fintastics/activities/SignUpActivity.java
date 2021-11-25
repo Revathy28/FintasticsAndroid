@@ -117,6 +117,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             accounttype = extras.getString("accounttype");
         }
 
+        if(accounttype != null && accounttype.equalsIgnoreCase("Personal")){
+            ll_referralcode.setVisibility(View.GONE);
+        }else{
+            ll_referralcode.setVisibility(View.VISIBLE);
+        }
+
         btn_verify_email.setOnClickListener(this);
         btn_login.setOnClickListener(this);
         
@@ -331,7 +337,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     response.body().getData().getDob(),
                                     response.body().getData().getContact_number(),
                                     response.body().getData().getAccount_type(),
-                                    response.body().getData().getRoll_type()
+                                    response.body().getData().getRoll_type(),
+                                    response.body().getData().getProfile_img()
 
                             );
                             gotoDashboard();

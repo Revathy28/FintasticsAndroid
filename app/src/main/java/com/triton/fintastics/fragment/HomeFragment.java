@@ -90,9 +90,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.spr_transacation_type)
     Spinner spr_transacation_type;
 
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.fl_root)
-    FrameLayout fl_root;
+
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.rv_transaction)
@@ -160,6 +158,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.txt_transcperiod)
     TextView txt_transcperiod;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.ll_total_expense)
+    LinearLayout ll_total_expense;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.ll_total_income)
+    LinearLayout ll_total_income;
+
     boolean showincome = true;
     private Context mContext;
     private List<PaymentTypeListResponse.DataBean> paymenttypeList;
@@ -200,6 +206,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         mContext = getActivity();
         avi_indicator.setVisibility(View.GONE);
+        ll_total_expense.setVisibility(View.GONE);
 
 
         SessionManager sessionManager = new SessionManager(mContext);
@@ -294,10 +301,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 txt_lbl_weekly.setTextColor(getResources().getColor(R.color.txt_black));
                 txt_lbl_monthly.setTextColor(getResources().getColor(R.color.txt_black));
                 txt_lbl_annually.setTextColor(getResources().getColor(R.color.txt_black));
-                rl_daily.setBackgroundResource(R.drawable.active_circle_bgm);
-                rl_weekly.setBackgroundResource(R.drawable.circle_bgm);
-                rl_monthly.setBackgroundResource(R.drawable.circle_bgm);
-                rl_annually.setBackgroundResource(R.drawable.circle_bgm);
+                rl_daily.setBackgroundResource(R.drawable.rounded_corner_bg_color);
+                rl_weekly.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_monthly.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_annually.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
                 Log.w(TAG,"rl_daily currentdate : "+currentdate);
                 start_date = currentdate;
                 end_date = currentdate;
@@ -309,10 +316,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 txt_lbl_weekly.setTextColor(getResources().getColor(R.color.white));
                 txt_lbl_monthly.setTextColor(getResources().getColor(R.color.txt_black));
                 txt_lbl_annually.setTextColor(getResources().getColor(R.color.txt_black));
-                rl_daily.setBackgroundResource(R.drawable.circle_bgm);
-                rl_weekly.setBackgroundResource(R.drawable.active_circle_bgm);
-                rl_monthly.setBackgroundResource(R.drawable.circle_bgm);
-                rl_annually.setBackgroundResource(R.drawable.circle_bgm);
+                rl_daily.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_weekly.setBackgroundResource(R.drawable.rounded_corner_bg_color);
+                rl_monthly.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_annually.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 try {
                     Date myDate = simpleDateFormat.parse(currentdate);
@@ -350,10 +357,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 txt_lbl_weekly.setTextColor(getResources().getColor(R.color.txt_black));
                 txt_lbl_monthly.setTextColor(getResources().getColor(R.color.white));
                 txt_lbl_annually.setTextColor(getResources().getColor(R.color.txt_black));
-                rl_daily.setBackgroundResource(R.drawable.circle_bgm);
-                rl_weekly.setBackgroundResource(R.drawable.circle_bgm);
-                rl_monthly.setBackgroundResource(R.drawable.active_circle_bgm);
-                rl_annually.setBackgroundResource(R.drawable.circle_bgm);
+                rl_daily.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_weekly.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_monthly.setBackgroundResource(R.drawable.rounded_corner_bg_color);
+                rl_annually.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
                 int year = Calendar.getInstance().get(Calendar.YEAR);
                 int month = Calendar.getInstance().get(Calendar.MONTH);
                 int month1 =(month + 1);
@@ -387,10 +394,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 txt_lbl_weekly.setTextColor(getResources().getColor(R.color.txt_black));
                 txt_lbl_monthly.setTextColor(getResources().getColor(R.color.txt_black));
                 txt_lbl_annually.setTextColor(getResources().getColor(R.color.white));
-                rl_daily.setBackgroundResource(R.drawable.circle_bgm);
-                rl_weekly.setBackgroundResource(R.drawable.circle_bgm);
-                rl_monthly.setBackgroundResource(R.drawable.circle_bgm);
-                rl_annually.setBackgroundResource(R.drawable.active_circle_bgm);
+                rl_daily.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_weekly.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_monthly.setBackgroundResource(R.drawable.rounded_cornerwithcolor);
+                rl_annually.setBackgroundResource(R.drawable.rounded_corner_bg_color);
                 int yearannually = Calendar.getInstance().get(Calendar.YEAR);
                 String annuallystartdate = yearannually+"-"+"01"+"-"+"01";
                 String annuallyenddate = yearannually+"-"+"12"+"-"+"31";
@@ -411,24 +418,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void showincomeTab() {
+        ll_total_expense.setVisibility(View.GONE);
+        ll_total_income.setVisibility(View.VISIBLE);
         transaction_way = "Credit";
         showincome = true;
-        fl_root.setBackgroundResource(R.drawable.rectangle_corner_primary_blue);
-        ll_income.setBackgroundResource(R.drawable.tabincome_active);
-        ll_expense.setBackgroundResource(R.color.white);
+        txt_lbl_expensetab.setBackgroundResource(R.color.white);
+        txt_lbl_incometab.setBackgroundResource(R.drawable.rectangle_corner_bg_thicblue);
         txt_lbl_incometab.setTextColor(getResources().getColor(R.color.white));
-        txt_lbl_expensetab.setTextColor(getResources().getColor(R.color.black));
+        txt_lbl_expensetab.setTextColor(getResources().getColor(R.color.text_black));
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void showExpenseTab() {
+        ll_total_expense.setVisibility(View.VISIBLE);
+        ll_total_income.setVisibility(View.GONE);
         transaction_way = "Debit";
         showincome = false;
-        fl_root.setBackgroundResource(R.drawable.rectangle_corner_bgnd_white);
-        ll_income.setBackgroundResource(R.drawable.tabncone_inactive);
-        ll_expense.setBackgroundResource(R.color.primary);
-        txt_lbl_incometab.setTextColor(getResources().getColor(R.color.black));
+        txt_lbl_expensetab.setBackgroundResource(R.drawable.rectangle_corner_bg_thicblue);
+        txt_lbl_incometab.setBackgroundResource(R.color.white);
+        txt_lbl_incometab.setTextColor(getResources().getColor(R.color.text_black));
         txt_lbl_expensetab.setTextColor(getResources().getColor(R.color.white));
 
     }

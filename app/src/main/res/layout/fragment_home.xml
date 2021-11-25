@@ -70,54 +70,53 @@
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="false">
 
-                <FrameLayout
-                    android:id="@+id/fl_root"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rectangle_corner_bgnd_white">
-
-                    <LinearLayout
-                        android:id="@+id/ll_expense"
-                        android:layout_width="190dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="end"
-                        android:background="@color/white"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txt_lbl_expensetab"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_10dp"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="center"
-                            android:text="@string/expense"
-                            android:textColor="@color/text_black"
-                            android:textSize="@dimen/_14sp" />
-                    </LinearLayout>
-
+                    android:orientation="horizontal">
                     <LinearLayout
                         android:id="@+id/ll_income"
-                        android:layout_width="190dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/tabincome_active"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/_20dp"
+                        android:layout_marginLeft="@dimen/_20dp">
 
                         <TextView
                             android:id="@+id/txt_lbl_incometab"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_10dp"
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="center"
                             android:text="@string/income"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_14sp" />
+                            android:textSize="@dimen/_14sp"
+                            android:background="@drawable/rectangle_corner_bg_thicblue"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_expense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_lbl_expensetab"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/expense"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/_14sp"
+                            android:background="@color/white"
+                            />
                     </LinearLayout>
 
-                </FrameLayout>
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -131,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/active_circle_bgm"
+                    android:background="@drawable/rounded_corner_bg_color"
                     android:id="@+id/rl_daily">
 
                     <TextView
@@ -144,15 +143,17 @@
                         android:padding="@dimen/_5dp"
                         android:text="Daily"
                         android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/circle_bgm"
-                    android:id="@+id/rl_weekly">
+                    android:background="@drawable/rounded_cornerwithcolor"
+                    android:id="@+id/rl_weekly"
+                    android:layout_marginStart="@dimen/_5dp"
+                    android:layout_marginEnd="@dimen/_5dp">
 
                     <TextView
                         android:id="@+id/txt_lbl_weekly"
@@ -164,15 +165,17 @@
                         android:padding="@dimen/_5dp"
                         android:text="Weekly"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/circle_bgm"
-                    android:id="@+id/rl_monthly">
+                    android:background="@drawable/rounded_cornerwithcolor"
+                    android:id="@+id/rl_monthly"
+                    android:layout_marginStart="@dimen/_5dp"
+                    android:layout_marginEnd="@dimen/_5dp">
 
                     <TextView
                         android:id="@+id/txt_lbl_monthly"
@@ -184,15 +187,17 @@
                         android:padding="@dimen/_5dp"
                         android:text="Monthly"
                         android:textColor="@color/txt_black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/circle_bgm"
-                    android:id="@+id/rl_annually">
+                    android:background="@drawable/rounded_cornerwithcolor"
+                    android:id="@+id/rl_annually"
+                    android:layout_marginStart="@dimen/_5dp"
+                    android:layout_marginEnd="@dimen/_5dp">
 
                     <TextView
                         android:id="@+id/txt_lbl_annually"
@@ -204,7 +209,7 @@
                         android:padding="@dimen/_5dp"
                         android:text="Annually"
                         android:textColor="@color/txt_black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -270,22 +275,25 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_20dp"
+                        android:id="@+id/ll_total_income">
 
                         <TextView
                             android:id="@+id/txt_lbl_income"
-                            android:layout_width="@dimen/_150dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="@string/income"
+                            android:text="Total Income"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sp" />
 
                         <TextView
+                            android:layout_marginStart="@dimen/_5dp"
                             android:id="@+id/txt_income_colon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -293,7 +301,8 @@
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/semicolon"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_14sp" />
+                            android:textSize="@dimen/_14sp"
+                            android:layout_marginLeft="@dimen/_5dp" />
 
                         <TextView
                             android:id="@+id/txt_income"
@@ -312,22 +321,26 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_20dp"
+                        android:id="@+id/ll_total_expense"
+                       >
 
                         <TextView
                             android:id="@+id/txt_lbl_expense"
-                            android:layout_width="@dimen/_150dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="@string/expense"
+                            android:text="Total Expense"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sp" />
 
                         <TextView
+                            android:layout_marginStart="@dimen/_5dp"
                             android:id="@+id/txt_expense_semicolon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -335,7 +348,8 @@
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/semicolon"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_14sp" />
+                            android:textSize="@dimen/_14sp"
+                            android:layout_marginLeft="@dimen/_5dp" />
 
                         <TextView
                             android:id="@+id/txt_expense"
@@ -358,7 +372,8 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/txt_lbl_balance"

@@ -28,6 +28,7 @@ import com.triton.fintastics.requestpojo.UpdateProfileRequest;
 import com.triton.fintastics.responsepojo.SignupResponse;
 import com.triton.fintastics.sessionmanager.SessionManager;
 import com.triton.fintastics.utils.ConnectionDetector;
+import com.triton.fintastics.utils.NumericKeyBoardTransformationMethod;
 import com.triton.fintastics.utils.RestUtils;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -120,6 +121,9 @@ public class EditProfileActivity extends AppCompatActivity {
         avi_indicator.setVisibility(View.GONE);
         ll_mygroup.setVisibility(View.GONE);
         Log.w(TAG,"onCreate");
+
+        edt_contactno.setTransformationMethod(new NumericKeyBoardTransformationMethod());
+
 
 
 
@@ -283,6 +287,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     public void editProfileValidator() {
+        Log.w(TAG,"editProfileValidator " + "editProfileValidator");
+
         boolean can_proceed = true;
 
         if (Objects.requireNonNull(edt_firstname.getText()).toString().trim().equals("")
@@ -293,22 +299,20 @@ public class EditProfileActivity extends AppCompatActivity {
             Toasty.warning(getApplicationContext(), "Please enter the fields", Toast.LENGTH_SHORT, true).show();
             can_proceed = false;
         } else if (edt_firstname.getText().toString().trim().equals("")) {
-            edt_firstname.setError("Please enter first name");
+            edt_firstname.setError("Please enter user name");
             edt_firstname.requestFocus();
             can_proceed = false;
         }
-        else if (edt_lastname.getText().toString().trim().equals("")) {
-            edt_lastname.setError("Please enter last name");
-            edt_lastname.requestFocus();
+       /* else if (SelectedDOBddate != null && SelectedDOBddate.isEmpty()) {
+            showErrorLoading("Please select date of birth");
             can_proceed = false;
-        }  else if (SelectedDOBddate != null && SelectedDOBddate.isEmpty()) {
-            showErrorLoading("Please select date of transaction");
-            can_proceed = false;
-        } else if (edt_contactno.getText().toString().trim().equals("")) {
+        }*/ else if (edt_contactno.getText().toString().trim().equals("")) {
             edt_contactno.setError("Please enter contact number");
             edt_contactno.requestFocus();
             can_proceed = false;
         }
+
+        Log.w(TAG,"editProfileValidator " + "can_proceed : "+can_proceed);
 
         if (can_proceed) {
             if (new ConnectionDetector(EditProfileActivity.this).isNetworkAvailable(EditProfileActivity.this)) {
@@ -329,18 +333,18 @@ public class EditProfileActivity extends AppCompatActivity {
         avi_indicator.smoothToShow();
         RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
         Call<SignupResponse> call = apiInterface.UpdateProfileRequestCall(RestUtils.getContentType(), updateProfileRequest());
-        Log.w(TAG,"SignupResponse url  :%s"+" "+ call.request().url().toString());
+        Log.w(TAG,"UpdateProfileRequestCall url  :%s"+" "+ call.request().url().toString());
 
         call.enqueue(new Callback<SignupResponse>() {
             @SuppressLint("LogNotTimber")
             @Override
             public void onResponse(@NonNull Call<SignupResponse> call, @NonNull Response<SignupResponse> response) {
                 avi_indicator.smoothToHide();
-                Log.w(TAG,"SignupResponse" + new Gson().toJson(response.body()));
+                Log.w(TAG,"UpdateProfileRequestCall" + new Gson().toJson(response.body()));
                 if (response.body() != null) {
 
                     if (200 == response.body().getCode()) {
-                        Toasty.success(getApplicationContext(),response.body().getMessage(), Toast.LENGTH_SHORT, true).show();
+                        Toasty.success(getApplicationContext(),"Profile updated sucessfully", Toast.LENGTH_SHORT, true).show();
                         if(response.body().getData() != null) {
                             SessionManager sessionManager = new SessionManager(EditProfileActivity.this);
                             sessionManager.setIsLogin(true);
@@ -355,7 +359,8 @@ public class EditProfileActivity extends AppCompatActivity {
                                     response.body().getData().getDob(),
                                     response.body().getData().getContact_number(),
                                     response.body().getData().getAccount_type(),
-                                    response.body().getData().getRoll_type()
+                                    response.body().getData().getRoll_type(),
+                                    response.body().getData().getProfile_img()
 
                             );
                             startActivity(new Intent(getApplicationContext(),DashoardActivity.class));
@@ -376,7 +381,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<SignupResponse> call,@NonNull Throwable t) {
                 avi_indicator.smoothToHide();
-                Log.e("SignupResponse flr", "--->" + t.getMessage());
+                Log.e("UpdateProfileReq flr", "--->" + t.getMessage());
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

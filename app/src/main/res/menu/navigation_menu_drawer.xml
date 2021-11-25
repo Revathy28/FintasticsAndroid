@@ -41,6 +41,11 @@
             >
 
             <menu>
+                <item
+                    android:id="@+id/nav_item_ten"
+                    android:icon="@drawable/icn_family"
+                    android:title="@string/edit_profile"
+                    />
         <item android:id="@+id/nav_item_seven"
             android:icon="@drawable/icn_change_password"
             android:title="@string/change_password"
@@ -57,11 +62,7 @@
             android:title="@string/chat"
             android:visible="true"/>
 
-                <item
-                    android:id="@+id/nav_item_ten"
-                    android:icon="@drawable/icn_family"
-                    android:title="@string/edit_profile"
-                    />
+
 
                 <item
                     android:id="@+id/nav_item_eleventh"

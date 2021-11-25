@@ -3,15 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/new_rounded_corner_btn.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/rectangle_corner_bg_white_corner_blue.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/rounded_corner_bg_color.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/rounded_cornerwithcolor.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/textview_bg_change.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable-v24/textview_bg_chat.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/ic_baseline_settings_voice_24.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_blue.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_grey.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_solidthicblue.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_thicblue.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bg_white.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_bgnd_white.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangle_corner_primary_blue.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangular_corner_bg_darkblue.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangular_corner_bg_grey.xml" value="0.2703125" />
+        <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rectangular_corner_bg_lightgrey.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/drawable/rounded_color.xml" value="0.2703125" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_account_summary.xml" value="0.24010416666666667" />
         <entry key="..\:/TritonAppsGIt/FintasticsAndroid/app/src/main/res/layout/activity_add_transaction.xml" value="0.25416666666666665" />

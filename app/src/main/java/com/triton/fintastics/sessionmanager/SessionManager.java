@@ -31,6 +31,7 @@ public class SessionManager {
     public static final String KEY_CONTACTNUMBER = "contactnumber";
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ROLL_TYPE = "roll_type";
+    public static final String KEY_PROFILEIMAGE = "profileimg";
 
 
 
@@ -62,7 +63,7 @@ public class SessionManager {
     }
 
 
-    public void createLoginSession(String id, String username,String useremail, String refcode,String password,String firstname, String lastname,String dob, String contactnumber,String account_type,String roll_type) {
+    public void createLoginSession(String id, String username,String useremail, String refcode,String password,String firstname, String lastname,String dob, String contactnumber,String account_type,String roll_type,String profileimg) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ID, id);
         editor.putString(KEY_USERNAME, username);
@@ -75,6 +76,7 @@ public class SessionManager {
         editor.putString(KEY_CONTACTNUMBER,contactnumber);
         editor.putString(KEY_ACCOUNT_TYPE,account_type);
         editor.putString(KEY_ROLL_TYPE,roll_type);
+        editor.putString(KEY_PROFILEIMAGE,profileimg);
         Log.e(TAG, "................................>> session Login Details " + "KEY_ID" + id);
 
         editor.commit();
@@ -96,6 +98,7 @@ public class SessionManager {
         user.put(KEY_CONTACTNUMBER, pref.getString(KEY_CONTACTNUMBER, ""));
         user.put(KEY_ACCOUNT_TYPE, pref.getString(KEY_ACCOUNT_TYPE, ""));
         user.put(KEY_ROLL_TYPE, pref.getString(KEY_ROLL_TYPE, ""));
+        user.put(KEY_PROFILEIMAGE, pref.getString(KEY_PROFILEIMAGE, ""));
         return user;
     }
 

@@ -90,10 +90,11 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="false"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_20dp"
+                android:layout_marginRight="@dimen/_20dp"
                 android:contentDescription="@string/arrow_image"
                 app:srcCompat="@drawable/icn_arrow"
-                android:layout_marginEnd="@dimen/_20dp"
-                android:layout_marginRight="@dimen/_20dp" />
+                android:visibility="gone"/>
         </RelativeLayout>
 
     </FrameLayout>

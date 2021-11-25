@@ -168,7 +168,8 @@ public class LoginActivity extends AppCompatActivity {
                                     response.body().getData().getDob(),
                                     response.body().getData().getContact_number(),
                                     response.body().getData().getAccount_type(),
-                                    response.body().getData().getRoll_type()
+                                    response.body().getData().getRoll_type(),
+                                    response.body().getData().getProfile_img()
 
                             );
                             Intent intent = new Intent(LoginActivity.this, DashoardActivity.class);

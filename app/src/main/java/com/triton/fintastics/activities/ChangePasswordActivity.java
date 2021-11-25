@@ -155,7 +155,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (response.body() != null) {
 
                     if (200 == response.body().getCode()) {
-                        Toasty.success(getApplicationContext(),response.body().getMessage(), Toast.LENGTH_SHORT, true).show();
+                        Toasty.success(getApplicationContext(),"Password changed successfully", Toast.LENGTH_SHORT, true).show();
                         if(response.body().getData() != null) {
                             SessionManager sessionManager = new SessionManager(ChangePasswordActivity.this);
                             sessionManager.setIsLogin(true);
@@ -170,7 +170,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     response.body().getData().getDob(),
                                     response.body().getData().getContact_number(),
                                     response.body().getData().getAccount_type(),
-                                    response.body().getData().getRoll_type()
+                                    response.body().getData().getRoll_type(),
+                                    response.body().getData().getProfile_img()
 
                             );
                            
