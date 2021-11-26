@@ -105,6 +105,8 @@ public class EditProfileActivity extends AppCompatActivity {
     private String password = "";
     private String referalcode = "";
     private String profileimag = "";
+    private String account_type;
+    private String roll_type;
     Dialog alertDialog;
 
     private final int DOB_DATE_PICKER_ID = 1;
@@ -149,7 +151,8 @@ public class EditProfileActivity extends AppCompatActivity {
        SelectedDOBddate = user.get(SessionManager.KEY_DOB);
        String emailid = user.get(SessionManager.KEY_EMAIL_ID);
        String contactnumber = user.get(SessionManager.KEY_CONTACTNUMBER);
-       String roll_type = user.get(SessionManager.KEY_ROLL_TYPE);
+        roll_type = user.get(SessionManager.KEY_ROLL_TYPE);
+        account_type = user.get(SessionManager.KEY_ACCOUNT_TYPE);
         if(roll_type != null && roll_type.equalsIgnoreCase("Admin")){
             ll_mygroup.setVisibility(View.VISIBLE);
         }else{
@@ -414,8 +417,8 @@ public class EditProfileActivity extends AppCompatActivity {
         updateProfileRequest.setDob(SelectedDOBddate);
         updateProfileRequest.setContact_number(edt_contactno.getText().toString());
         updateProfileRequest.setMobile_type("Android");
-        updateProfileRequest.setAccount_type("");
-        updateProfileRequest.setRoll_type("");
+        updateProfileRequest.setAccount_type(account_type);
+        updateProfileRequest.setRoll_type(roll_type);
         updateProfileRequest.setParent_of(referalcode);
         updateProfileRequest.setProfile_img(profileimag);
 
