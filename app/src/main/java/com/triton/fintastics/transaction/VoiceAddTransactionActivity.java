@@ -1,5 +1,7 @@
 package com.triton.fintastics.transaction;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,15 +27,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.triton.fintastics.R;
 import com.triton.fintastics.activities.DashoardActivity;
+import com.triton.fintastics.activities.SignUpActivity;
 import com.triton.fintastics.api.APIClient;
 import com.triton.fintastics.api.RestApiInterface;
 import com.triton.fintastics.requestpojo.TransactionCreateRequest;
 import com.triton.fintastics.requestpojo.UserIdRequest;
+import com.triton.fintastics.responsepojo.GetCurrencyResponse;
 import com.triton.fintastics.responsepojo.PaymentTypeListResponse;
+import com.triton.fintastics.responsepojo.Payment_type_listResponse;
 import com.triton.fintastics.responsepojo.SuccessResponse;
 import com.triton.fintastics.responsepojo.TransactionGetBalanceResponse;
 import com.triton.fintastics.sessionmanager.SessionManager;
@@ -74,6 +82,10 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
     Spinner spr_payment_type;
 
     @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.spr_sub_desc_type)
+    Spinner spr_sub_desc_type;
+
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.spr_transacation_type)
     Spinner spr_transacation_type;
 
@@ -100,12 +112,10 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edt_amount)
     EditText edt_amount;
-
+    String Place;
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.btn_submit)
     Button btn_submit;
-
-    private List<PaymentTypeListResponse.DataBean> transactiontypeList;
 
     HashMap<String,String> hashMap_PaymentTypevalue = new HashMap<>();
     private String strTransactionType;
@@ -115,12 +125,19 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
     private String strDescType;
     private String strDescTypeId;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.txt_lbl_description)
+    TextView txt_lbl_description;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.rl_sub_desc)
+    RelativeLayout rl_sub_desc;
 
     private int TRANSACTION_DATE_PICKER_ID = 1;
     private int year, month, day;
 
     private String SelectedTransactionddate= "";
-    private String strPaymentType;
+    private String strPaymentType,strSubDecrType;
     private Dialog alertDialog;
     private String transaction_way = "";
     private String userid;
@@ -133,8 +150,9 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
     private String voicecommand;
 
     ArrayList<String> array_paymentypename = new ArrayList<>();
-    private List<PaymentTypeListResponse.DescTypeBean> desctypeList;
-
+    ArrayList<String> array_sub_desc_type = new ArrayList<>();
+    List<Payment_type_listResponse.DataBean.Payment_typesDatabeanList> dataBeanList;
+    List<Payment_type_listResponse.DataBean.Desc_typesDatabeanList> desctypeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,9 +180,31 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
             }
         });
 
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH)+1;
+        int year = c.get(Calendar.YEAR);
+
+        if (month<10){
+            Place = "0"+ month;
+        }
+
+        String da = String.valueOf(day);
+        String yy = String.valueOf(year);
+
+        txt_day.setText(da);
+        txt_month.setText(Place);
+        txt_year.setText(yy);
+
         array_paymentypename.add("Select Payment Type");
         array_paymentypename.add("Income");
         array_paymentypename.add("Expense");
+
+        array_sub_desc_type.add("Select Sub Description Type");
+        array_sub_desc_type.add("Cash Sub");
+        array_sub_desc_type.add("Cash Sub 1");
+        array_sub_desc_type.add("Cash Sub 2");
+        array_sub_desc_type.add("Cash Sub 3");
 
         Log.w(TAG,"array_paymentypename : "+new Gson().toJson(array_paymentypename));
 
@@ -223,20 +263,125 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
 
             }
         });
+
+        spr_sub_desc_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("LogNotTimber")
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {
+                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.text_black));
+                strSubDecrType = spr_sub_desc_type.getSelectedItem().toString();
+
+                Log.w(TAG,"strsub : "+strPaymentType);
+
+//                if(strPaymentType != null && strPaymentType.equalsIgnoreCase("Income")){
+//                    transaction_way = "Credit";
+//                }
+//                else if(strPaymentType != null && strPaymentType.equalsIgnoreCase("Expense")){
+//                    transaction_way = "Debit";
+//                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
         spr_desc_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @SuppressLint("LogNotTimber")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {
                 ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.text_black));
                 strDescType = spr_desc_type.getSelectedItem().toString();
-                strDescTypeId = hashMap_DescTypevalue.get(strTransactionType);
+              //  strDescTypeId = hashMap_DescTypevalue.get(strTransactionType);
+
+                if(strDescType.equals("   CASH")){
+
+                    strDescTypeId = "619f82faea15b9691ae3cbb9";
+                }
+               else if(strDescType.equals("FOOD")){
+
+                    strDescTypeId = "61b07759ea15b9691ae3d19d";
+                }
+                else if(strDescType.equals("TOUR")){
+
+                    strDescTypeId = "61b077aeea15b9691ae3d1b2";
+                }
+                else if(strDescType.equals("CLOTH")){
+
+                    strDescTypeId = "61b077b7ea15b9691ae3d1b6";
+                }
+                else if(strDescType.equals("DEPT")){
+
+                    strDescTypeId = "61b077caea15b9691ae3d1bc";
+                }
+                else if(strDescType.equals("BORROW")){
+
+                    strDescTypeId = "61b077d7ea15b9691ae3d1c0";
+                }
+                else if(strDescType.equals("RENT")){
+
+                    strDescTypeId = "61b077eaea15b9691ae3d1d2";
+                }
+                else if(strDescType.equals("EDUCATION")){
+
+                    strDescTypeId = "61b077f4ea15b9691ae3d1d6";
+                }
+                else if(strDescType.equals("MEDICAL")){
+
+                    strDescTypeId = "61b07802ea15b9691ae3d1da";
+                }
+                else if(strDescType.equals("WATER")){
+
+                    strDescTypeId = "61b07823ea15b9691ae3d1ec";
+                }
+                else if(strDescType.equals("GAS")){
+
+                    strDescTypeId = "61b0782cea15b9691ae3d1f0";
+                }
+                else if(strDescType.equals("REPAIR")){
+
+                    strDescTypeId = "61b07835ea15b9691ae3d1f4";
+                }
+                else if(strDescType.equals("SALARY")){
+
+                    strDescTypeId = "61b07845ea15b9691ae3d1f8";
+                }
+                else if(strDescType.equals("CASH")){
+
+                    strDescTypeId = "63453e5803321a60432e83e4";
+                }
+                else if(strDescType.equals("~!@~!@~!@~")){
+
+                    strDescTypeId = "6345416203321a60432e83ee";
+                }
+                else if(strDescType.equals("ss")){
+
+                    strDescTypeId = "634541c603321a60432e83f3";
+                }
+                else if(strDescType.equals("ssdad")){
+
+                    strDescTypeId = "6345426c03321a60432e83f7";
+                }
+                else if(strDescType.equals("asdadad")){
+
+                    strDescTypeId = "6345427403321a60432e83fb";
+                }
+                else if(strDescType.equals("SSSSSSS")){
+
+                    strDescTypeId = "63454bd203321a60432e841b";
+                }
 
                 Log.w(TAG,"strDescType : "+strDescType+" strDescTypeId :"+strDescTypeId);
 
 
 
+//                txt_lbl_description.setVisibility(View.VISIBLE);
+//                rl_sub_desc.setVisibility(View.VISIBLE);
 
-
+                if (array_sub_desc_type != null && array_sub_desc_type.size() > 0) {
+                    setSubDescrType(array_sub_desc_type);
+                }
 
             }
 
@@ -316,10 +461,24 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
                             }
                         }
 
-                        for(int i=0;i<transactiontypeList.size();i++){
-                            if(transactiontypeList.get(i).getPayment_type().equalsIgnoreCase(s)){
+                        for(int i=0;i<dataBeanList.size();i++){
+                            if(dataBeanList.get(i).getPayment_type().equalsIgnoreCase(s)){
                                 strTransactionType  = s;
-                                setTransactiontype(transactiontypeList);
+                               // setTransactiontype(dataBeanList);
+
+                                if (dataBeanList != null && dataBeanList.size() > 0) {
+                                    Log.w(TAG, "Size--" + dataBeanList.size());
+                                    ArrayList<String> arrayList = new ArrayList<>();
+                                    arrayList.add("Select Transaction Type");
+                                    for (int j = 0; j < dataBeanList.size(); j++) {
+                                        String string = dataBeanList.get(j).getPayment_type();
+                                        arrayList.add(string);
+                                    }
+
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(VoiceAddTransactionActivity.this, android.R.layout.simple_spinner_item, arrayList);
+                                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    spr_transacation_type.setAdapter(adapter);
+                                }
                                 break;
 
                             }
@@ -327,21 +486,31 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
                         for(int i=0;i<desctypeList.size();i++){
                             if(desctypeList.get(i).getDesc_type().equalsIgnoreCase(s)){
                                 strDescType  = s;
-                                setDesctype(desctypeList);
+
+                                if (desctypeList != null && desctypeList.size() > 0) {
+
+                                    Log.w(TAG, "Size--" + desctypeList.size());
+                                    ArrayList<String> arrayList = new ArrayList<>();
+                                    arrayList.add("Select Description Type");
+                                    for (int j = 0; j < desctypeList.size(); j++) {
+                                        String string = desctypeList.get(j).getDesc_type();
+                                        arrayList.add(string);
+
+                                    }
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(VoiceAddTransactionActivity.this, android.R.layout.simple_spinner_item, arrayList);
+                                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    spr_desc_type.setAdapter(adapter);
+
+                                }
                                 break;
 
                             }
                         }
 
 
-                        Log.w(TAG, "Transactiontypelist : "+new Gson().toJson(transactiontypeList));
-
-
-
-
+                        Log.w(TAG, "Transactiontypelist : "+new Gson().toJson(dataBeanList));
 
                     }
-
 
                 }
             }
@@ -359,99 +528,130 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
         return capMatcher.appendTail(capBuffer).toString();
     }
     @SuppressLint("LogNotTimber")
-    public void paymentTypeListResponseCall(){
+
+//    private void jobFindResponseCall(String job_no) {
+//        APIInterface apiInterface = RetrofitClient.getClient().create(APIInterface.class);
+//        Call<BD_DetailsResponse> call = apiInterface.BD_DetailsResponseCall(RestUtils.getContentType(), serviceRequest(job_no));
+//        Log.w(TAG, "Jobno Find Response url  :%s" + " " + call.request().url().toString());
+//        call.enqueue(new Callback<BD_DetailsResponse>() {
+//            @SuppressLint("LogNotTimber")
+//            @Override
+//            public void onResponse(@NonNull Call<BD_DetailsResponse> call, @NonNull Response<BD_DetailsResponse> response) {
+//                Log.w(TAG, "Jobno Find Response" + new Gson().toJson(response.body()));
+//
+//                if (response.body() != null) {
+//
+//                    message = response.body().getMessage();
+//                    Log.d("message", message);
+//
+//                    if (200 == response.body().getCode()) {
+//                        if (response.body().getData() != null) {
+//                            breedTypedataBeanList = response.body().getData();
+//
+//                            setView(breedTypedataBeanList);
+//                            Log.d("dataaaaa", String.valueOf(breedTypedataBeanList));
+//
+//                        }
+//
+//                    } else if (400 == response.body().getCode()) {
+//                        if (response.body().getMessage() != null && response.body().getMessage().equalsIgnoreCase("There is already a user registered with this email id. Please add new email id")) {
+//
+//                        }
+//                    } else {
+//
+//                        Toasty.warning(getApplicationContext(), "" + response.body().getMessage(), Toasty.LENGTH_LONG).show();
+//                    }
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<BD_DetailsResponse> call, @NonNull Throwable t) {
+//                Log.e("Jobno Find ", "--->" + t.getMessage());
+//                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
+//
+//    private BD_DetailsRequest serviceRequest(String job_no) {
+//        BD_DetailsRequest service = new BD_DetailsRequest();
+//        service.setJob_id(job_no);
+//        Log.w(TAG, "Jobno Find Request " + new Gson().toJson(service));
+//        return service;
+//    }
+//
+//    private void setView(List<BD_DetailsResponse.DataBean> dataBeanList) {
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        activityBasedListAdapter = new BD_DetailsAdapter(getApplicationContext(), dataBeanList,this);
+//        recyclerView.setAdapter(activityBasedListAdapter);
+//    }
+
+    private void paymentTypeListResponseCall() {
         avi_indicator.setVisibility(View.VISIBLE);
         avi_indicator.smoothToShow();
-        //Creating an object of our api interface
         RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
-        Call<PaymentTypeListResponse> call = apiInterface.paymentTypeListResponseCall(RestUtils.getContentType());
-        Log.w(TAG,"url  :%s"+ call.request().url().toString());
-
-        call.enqueue(new Callback<PaymentTypeListResponse>() {
-
-            @SuppressLint("LogNotTimber")
+        Call<Payment_type_listResponse> call = apiInterface.payment_TypeListResponseCall(RestUtils.getContentType());
+        Log.w(TAG, "getcurrencyresponsecall url  :%s" + " " + call.request().url().toString());
+        call.enqueue(new Callback<Payment_type_listResponse>() {
             @Override
-            public void onResponse(@NonNull Call<PaymentTypeListResponse> call, @NonNull Response<PaymentTypeListResponse> response) {
+            public void onResponse(Call<Payment_type_listResponse> call, Response<Payment_type_listResponse> response) {
                 avi_indicator.smoothToHide();
-
-
+                Log.w(TAG, "GetCurrencyResponse" + new Gson().toJson(response.body()));
+                Payment_type_listResponse cr = response.body();
                 if (response.body() != null) {
-                    if(200 == response.body().getCode()) {
-                        Log.w(TAG, "PaymentTypeListResponse" + new Gson().toJson(response.body()));
+                    String message = response.body().getMessage();
+                    if (200 == response.body().getCode()) {
 
-                        transactionGetBalanceAmountRequestCall();
                         if (response.body().getData() != null) {
-                            transactiontypeList = response.body().getData();
+                            dataBeanList = response.body().getData().getPaymenttypeList();
+                            desctypeList = response.body().getData().getDesctypeList();
+                            if (dataBeanList != null && dataBeanList.size() > 0) {
+
+                                Log.w(TAG, "Size--" + dataBeanList.size());
+                                ArrayList<String> arrayList = new ArrayList<>();
+                                arrayList.add("Select Transaction Type");
+                                for (int i = 0; i < dataBeanList.size(); i++) {
+                                    String string = dataBeanList.get(i).getPayment_type();
+                                 //   String transaction_type_id = dataBeanList.get(i).get_id();
+                                    arrayList.add(string);
+
+                                }
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(VoiceAddTransactionActivity.this, android.R.layout.simple_spinner_item, arrayList);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spr_transacation_type.setAdapter(adapter);
+
+                            }
+
+                            if (desctypeList != null && desctypeList.size() > 0) {
+
+                                Log.w(TAG, "Size--" + desctypeList.size());
+                                ArrayList<String> arrayList = new ArrayList<>();
+                                arrayList.add("Select Description Type");
+                                for (int i = 0; i < desctypeList.size(); i++) {
+                                    String string = desctypeList.get(i).getDesc_type();
+                                  //  String desc_id = desctypeList.get(i).get_id();
+                                    arrayList.add(string);
+
+                                }
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(VoiceAddTransactionActivity.this, android.R.layout.simple_spinner_item, arrayList);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spr_desc_type.setAdapter(adapter);
+
+                            }
                         }
-
-                        if (transactiontypeList != null && transactiontypeList.size() > 0) {
-                            setTransactiontype(transactiontypeList);
-                        }
-
-                        if(response.body().getDesc_type() != null &&  response.body().getDesc_type().size()>0){
-                            desctypeList = response.body().getDesc_type();
-                            setDesctype(desctypeList);
-                        }
-
-
                     }
                 }
-
             }
 
             @Override
-            public void onFailure(@NonNull Call<PaymentTypeListResponse> call, @NonNull  Throwable t) {
-                avi_indicator.smoothToHide();
-                Log.w(TAG,"PaymentTypeListResponse flr"+t.getMessage());
+            public void onFailure(Call<Payment_type_listResponse> call, Throwable t) {
+
             }
+
+
         });
-
-    }
-
-    private void setDesctype(List<PaymentTypeListResponse.DescTypeBean> desc_type_list) {
-        ArrayList<String> desctypeArrayList = new ArrayList<>();
-        desctypeArrayList.add("Select Description Type");
-        for (int i = 0; i < desc_type_list.size(); i++) {
-
-            String desctype = desc_type_list.get(i).getDesc_type();
-            hashMap_DescTypevalue.put(desc_type_list.get(i).getDesc_type(), desc_type_list.get(i).get_id());
-
-            Log.w(TAG,"desctype-->"+desctype);
-            desctypeArrayList.add(desctype);
-
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(VoiceAddTransactionActivity.this, R.layout.spinner_item, desctypeArrayList);
-            spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item); // The drop down view
-            spr_desc_type.setAdapter(spinnerArrayAdapter);
-
-
-
-        }
-    }
-
-    private void setTransactiontype(List<PaymentTypeListResponse.DataBean> paymenttypeList) {
-        ArrayList<String> paymenttypeArrayList = new ArrayList<>();
-        paymenttypeArrayList.add("Select Transaction Type");
-        for (int i = 0; i < paymenttypeList.size(); i++) {
-            String paymenttype = paymenttypeList.get(i).getPayment_type();
-            hashMap_PaymentTypevalue.put(paymenttypeList.get(i).getPayment_type(), paymenttypeList.get(i).get_id());
-
-            Log.w(TAG,"paymenttype-->"+paymenttype);
-            paymenttypeArrayList.add(paymenttype);
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(VoiceAddTransactionActivity.this, R.layout.spinner_item, paymenttypeArrayList);
-            spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item); // The drop down view
-            spr_transacation_type.setAdapter(spinnerArrayAdapter);
-
-            if (strTransactionType != null) {
-                int spinnerPosition = spinnerArrayAdapter.getPosition(strTransactionType);
-                spr_transacation_type.setSelection(spinnerPosition);
-            }
-
-
-
-
-
-        }
-        Log.w(TAG,"setTransactiontypeList-->"+new Gson().toJson(paymenttypeArrayList));
 
     }
     private void setPaymentNametype(ArrayList<String> array_paymentypename) {
@@ -467,6 +667,18 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
 
     }
 
+    private void setSubDescrType(ArrayList<String> array_sub_desc_type) {
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(VoiceAddTransactionActivity.this, R.layout.spinner_item, array_sub_desc_type);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item); // The drop down view
+        spr_sub_desc_type.setAdapter(spinnerArrayAdapter);
+
+        if (strSubDecrType != null) {
+            int spinnerPosition = spinnerArrayAdapter.getPosition(strSubDecrType);
+            spr_sub_desc_type.setSelection(spinnerPosition);
+        }
+        Log.w(TAG,"setPaymentNametypeList-->"+new Gson().toJson(array_sub_desc_type));
+
+    }
 
 
     @SuppressLint("NonConstantResourceId")
@@ -561,7 +773,7 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
 
 
                     } else {
-                        showErrorLoading(response.body().getMessage());
+                      //  showErrorLoading(response.body().getMessage());
                     }
                 }
 
@@ -614,7 +826,7 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
         TransactionCreateRequest transactionCreateRequest = new TransactionCreateRequest();
         transactionCreateRequest.setTransaction_date(SelectedTransactionddate+" "+currenttime);
         transactionCreateRequest.setTransaction_type(strTransactionType);
-        transactionCreateRequest.setTransaction_desc(strDescType);
+        transactionCreateRequest.setTransaction_desc(strDescTypeId);
         transactionCreateRequest.setTransaction_way(transaction_way);
         transactionCreateRequest.setTransaction_amount(transactionamount);
         transactionCreateRequest.setTransaction_balance(transaction_balance);
@@ -624,18 +836,18 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
         return transactionCreateRequest;
     }
 
-    public void showErrorLoading(String errormesage){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(errormesage);
-        alertDialogBuilder.setPositiveButton("ok",
-                (arg0, arg1) -> hideLoading());
-
-
-
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
+//    public void showErrorLoading(String errormesage){
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//        alertDialogBuilder.setMessage(errormesage);
+//        alertDialogBuilder.setPositiveButton("ok",
+//                (arg0, arg1) -> hideLoading());
+//
+//
+//
+//
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        alertDialog.show();
+//    }
     public void hideLoading(){
         try {
             alertDialog.dismiss();
@@ -717,7 +929,7 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
             if(validdTransactionType()){
                 if(validdDescType()){
                     if (SelectedTransactionddate != null && SelectedTransactionddate.isEmpty()) {
-                        showErrorLoading("Please select date of transaction");
+                      ///  showErrorLoading("Please select date of transaction");
                         can_proceed = false;
                     } else if (edt_amount.getText().toString().trim().equals("")) {
                         edt_amount.setError("Please enter amount");

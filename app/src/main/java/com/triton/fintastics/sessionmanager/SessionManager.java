@@ -32,6 +32,7 @@ public class SessionManager {
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ROLL_TYPE = "roll_type";
     public static final String KEY_PROFILEIMAGE = "profileimg";
+    public static final String KEY_CURRENCY="currency";
 
 
 

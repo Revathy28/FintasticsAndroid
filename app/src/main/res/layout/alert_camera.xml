@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/txtprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:padding="@dimen/_10dp"
+        android:text="Profile"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/txtchooseprocess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:text="Choose the process"
+        android:textColor="@color/black"
+        android:paddingBottom="@dimen/_20dp"
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+         android:background="@color/light_grey"
+        />
+
+    <TextView
+        android:id="@+id/txttakepic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:padding="@dimen/_10dp"
+        android:text="Take Photo"
+        android:textColor="@color/primary"
+         android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey"
+        />
+
+    <TextView
+        android:id="@+id/txtpickgalary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick from Gallery"
+        android:padding="@dimen/_10dp"
+         android:gravity="center"
+        android:textColor="@color/primary"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey"
+        />
+    <TextView
+        android:id="@+id/txtcancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textStyle="bold"
+        android:padding="@dimen/_10dp"
+        android:textSize="@dimen/_18sp"
+        android:gravity="center"
+        android:textColor="@color/primary"/>
+</LinearLayout>

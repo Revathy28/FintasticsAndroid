@@ -318,7 +318,7 @@
             android:background="@drawable/rectangle_corner_bg_thicblue"
             android:fontFamily="@font/roboto_medium"
             android:onClick="gotoSharedLink"
-            android:text="@string/save"
+            android:text="Save"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_20sp"

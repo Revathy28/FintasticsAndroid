@@ -132,10 +132,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 changePasswordResponseCall();
             }
         }
-
-
-
-
     }
 
     @SuppressLint("LogNotTimber")
@@ -174,7 +170,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     response.body().getData().getProfile_img()
 
                             );
-                           
 
                         }
 

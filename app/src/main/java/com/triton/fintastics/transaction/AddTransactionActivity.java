@@ -158,6 +158,16 @@ public class AddTransactionActivity extends AppCompatActivity implements View.On
             }
         });
 
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+      //  String date = day + "/" + (month+1) + "/" + year;
+
+        txt_day.setText(day);
+        txt_month.setText(month);
+        txt_year.setText(year);
+
         if (new ConnectionDetector(AddTransactionActivity.this).isNetworkAvailable(AddTransactionActivity.this)) {
             paymentTypeListResponseCall();
         }

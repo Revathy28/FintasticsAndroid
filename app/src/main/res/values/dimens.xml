@@ -59,7 +59,7 @@
     <dimen name="_200dp">200dp</dimen>
 
     <!-- Set this to 50% of what you want the actual space between the tabs to be. -->
-    <dimen name="tab_spacing_half">5dp</dimen>
+    <dimen name="tab_spacing_half">0dp</dimen>
     <dimen name="_50dp">50dp</dimen>
     <dimen name="_0dp">0dp</dimen>
     <dimen name="_30dp">30dp</dimen>
@@ -88,4 +88,7 @@
 
     <dimen name="width_appoitmentdetails">135dp</dimen>
     <dimen name="_260dp">260dp</dimen>
+    <dimen name="_110dp">110dp</dimen>
+    <dimen name="_280dp">280dp</dimen>
+    <dimen name="_290dp">290dp</dimen>
 </resources>

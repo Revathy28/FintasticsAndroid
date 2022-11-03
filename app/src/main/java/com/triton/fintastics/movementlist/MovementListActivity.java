@@ -23,8 +23,10 @@ import com.triton.fintastics.api.APIClient;
 import com.triton.fintastics.api.RestApiInterface;
 import com.triton.fintastics.requestpojo.YearsListRequest;
 import com.triton.fintastics.responsepojo.PaymentTypeListResponse;
+import com.triton.fintastics.responsepojo.Payment_type_listResponse;
 import com.triton.fintastics.responsepojo.YearsListResponse;
 import com.triton.fintastics.sessionmanager.SessionManager;
+import com.triton.fintastics.transaction.VoiceAddTransactionActivity;
 import com.triton.fintastics.utils.ConnectionDetector;
 import com.triton.fintastics.utils.RestUtils;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -66,7 +68,7 @@ public class MovementListActivity extends AppCompatActivity {
     @BindView(R.id.rl_submit)
     RelativeLayout rl_submit;
 
-    private List<PaymentTypeListResponse.DataBean> paymenttypeList;
+    List<Payment_type_listResponse.DataBean.Payment_typesDatabeanList> dataBeanList;
     HashMap<String,String> hashMap_PaymentTypevalue = new HashMap<>();
     private String strTransactionType;
     private Object strTransactionTypeId;
@@ -113,6 +115,7 @@ public class MovementListActivity extends AppCompatActivity {
 
         if (new ConnectionDetector(MovementListActivity.this).isNetworkAvailable(MovementListActivity.this)) {
             paymentTypeListResponseCall();
+            yearsListResponseCall();
         }
 
         spr_transacation_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -176,69 +179,51 @@ public class MovementListActivity extends AppCompatActivity {
         finish();
     }
 
-    @SuppressLint("LogNotTimber")
-    public void paymentTypeListResponseCall(){
+    private void paymentTypeListResponseCall() {
         avi_indicator.setVisibility(View.VISIBLE);
         avi_indicator.smoothToShow();
-        //Creating an object of our api interface
         RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
-        Call<PaymentTypeListResponse> call = apiInterface.paymentTypeListResponseCall(RestUtils.getContentType());
-        Log.w(TAG,"url  :%s"+ call.request().url().toString());
-
-        call.enqueue(new Callback<PaymentTypeListResponse>() {
-
-            @SuppressLint("LogNotTimber")
+        Call<Payment_type_listResponse> call = apiInterface.payment_TypeListResponseCall(RestUtils.getContentType());
+        Log.w(TAG, "getcurrencyresponsecall url  :%s" + " " + call.request().url().toString());
+        call.enqueue(new Callback<Payment_type_listResponse>() {
             @Override
-            public void onResponse(@NonNull Call<PaymentTypeListResponse> call, @NonNull Response<PaymentTypeListResponse> response) {
+            public void onResponse(Call<Payment_type_listResponse> call, Response<Payment_type_listResponse> response) {
                 avi_indicator.smoothToHide();
-
-
+                Log.w(TAG, "GetCurrencyResponse" + new Gson().toJson(response.body()));
+                Payment_type_listResponse cr = response.body();
                 if (response.body() != null) {
-                    if(200 == response.body().getCode()) {
-                        yearsListResponseCall();
-                        Log.w(TAG, "PaymentTypeListResponse" + new Gson().toJson(response.body()));
-
+                    String message = response.body().getMessage();
+                    if (200 == response.body().getCode()) {
 
                         if (response.body().getData() != null) {
-                            paymenttypeList = response.body().getData();
+                            dataBeanList = response.body().getData().getPaymenttypeList();
+                            if (dataBeanList != null && dataBeanList.size() > 0) {
+
+                                Log.w(TAG, "Size--" + dataBeanList.size());
+                                ArrayList<String> arrayList = new ArrayList<>();
+                                arrayList.add("Select Type");
+                                for (int i = 0; i < dataBeanList.size(); i++) {
+                                    String string = dataBeanList.get(i).getPayment_type();
+                                    arrayList.add(string);
+
+                                }
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(MovementListActivity.this, android.R.layout.simple_spinner_item, arrayList);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spr_transacation_type.setAdapter(adapter);
+
+                            }
                         }
-
-                        if (paymenttypeList != null && paymenttypeList.size() > 0) {
-                            setPaymenttype(paymenttypeList);
-                        }
-
-
                     }
                 }
-
             }
 
             @Override
-            public void onFailure(@NonNull Call<PaymentTypeListResponse> call, @NonNull  Throwable t) {
-                avi_indicator.smoothToHide();
-                Log.w(TAG,"PaymentTypeListResponse flr"+t.getMessage());
+            public void onFailure(Call<Payment_type_listResponse> call, Throwable t) {
+
             }
+
+
         });
-
-    }
-    private void setPaymenttype(List<PaymentTypeListResponse.DataBean> paymenttypeList) {
-        ArrayList<String> paymenttypeArrayList = new ArrayList<>();
-        paymenttypeArrayList.add("Select Transaction Type");
-        for (int i = 0; i < paymenttypeList.size(); i++) {
-
-            String paymenttype = paymenttypeList.get(i).getPayment_type();
-            hashMap_PaymentTypevalue.put(paymenttypeList.get(i).getPayment_type(), paymenttypeList.get(i).get_id());
-
-            Log.w(TAG,"paymenttype-->"+paymenttype);
-            paymenttypeArrayList.add(paymenttype);
-
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(MovementListActivity.this, R.layout.spinner_item, paymenttypeArrayList);
-            spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item); // The drop down view
-            spr_transacation_type.setAdapter(spinnerArrayAdapter);
-
-
-
-        }
     }
 
     @SuppressLint("LogNotTimber")

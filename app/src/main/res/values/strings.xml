@@ -10,6 +10,8 @@
     <string name="select_your_account_type">Select Your Account Type</string>
     <string name="personal_account">Personal Account</string>
     <string name="family_account">Family Account</string>
+    <string name="cam_storage_permissions"><![CDATA[Allow Camera & Storage Permmsions]]></string>
+    <string name="camera_storage_permissions_app_data"><![CDATA[Allow Camera & Storage Permissions in App Info Page]]></string>
 
     <!-- Login Screen-->
     <string name="sign_in">Sign In</string>
@@ -20,9 +22,9 @@
     <string name="verifycode">Verify Code</string>
     <string name="verify_email">Verify email</string>
     <string name="login">Login</string>
-    <string name="create_an_account">Create An Account</string>
+    <string name="create_an_account"><u>Create An Account</u></string>
     <string name="remember_me">Remember me</string>
-    <string name="forget_password">Forget Password?</string>
+    <string name="forgot_password">Forgot Password?</string>
 
     <!-- SignIn Screen-->
     <string name="sign_up">Sign Up</string>
@@ -39,7 +41,7 @@
     <string name="set_profile">Set Profile</string>
 
     <!-- Create Profile Screen-->
-    <string name="save">Save</string>
+    <string name="update">Update</string>
     <string name="first_name">First Name</string>
     <string name="user_name">User Name</string>
     <string name="last_name">Last Name</string>
@@ -126,6 +128,7 @@
     <string name="transaction_type">Transaction Type</string>
     <string name="card">Card</string>
     <string name="description">Description</string>
+    <string name="sub_description">Sub Description</string>
     <string name="salary">Salary</string>
     <string name="credit">Credit</string>
     <string name="_0_00_wtplus">0.00</string>
@@ -147,7 +150,7 @@
     <string name="_24th_july">24th July</string>
     <string name="semicolon">:</string>
     <string name="seems_there_is_a_connectivity_issue_please_check_your_internet_connection_and_try_again">Seems there is a connectivity issue. Please check your internet connection and try again</string>
-    <string name="back_to_login">Back to login</string>
+    <string name="back_to_login">Back to login?</string>
     <string name="payment_type">Payment Type</string>
     <string name="date_of_transaction">Date Of Transaction</string>
     <string name="amount">Amount</string>
@@ -164,6 +167,37 @@
     <string name="typeyourmessage">Type Your Message</string>
     <string name="my_group">My Group</string>
     <string name="available_balance">Available Balance</string>
+    <string name="tabperiod">Periodic</string>
+    <string name="tabonetime">One Time</string>
+    <string name="make_periodic_budget">Make Periodic Budget</string>
+    <string name="image">Image</string>
+    <string name="keeping_your_business_organized_and_under_control_is_easy_with_budgets">Keeping your business organized and under control is easy with budgets</string>
+    <string name="make_one_time_budget">Make One Time Budget</string>
+    <string name="use_the_one_time_budget_on_special_occasions_vacation_christmas_or_reconstitution_in_order_to_stay_on_track">Use The One-Time Budget On Special Occasions Vacation, Christmas Or Reconstitution In Order To Stay On Track</string>
+    <string name="this_month">This Month</string>
+    <string name="food">Food</string>
+    <string name="expenses_0_50000">Expenses 0/50000 ₹</string>
+    <string name="show_more">show more</string>
+    <string name="records">Records</string>
+    <string name="overview">Overview</string>
+    <string name="total_spent">Total Spent</string>
+    <string name="spend_by_categories">Spend By Categories</string>
+    <string name="march">March</string>
+    <string name="name">Name</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="period">Period</string>
+    <string name="account">Account</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="currency">Currency</string>
+    <string name="start_date">Start Date</string>
+    <string name="enddate">End Date</string>
+    <string name="categories">Categories</string>
+    <string name="budget_overspent">Budget Overspent</string>
+    <string name="notify_when_amount_has_exceeded_the_budgey">Notify when amount has exceeded the budgey</string>
+    <string name="select_categories">Select Categories</string>
+    <string name="annually">Annually</string>
+    <string name="active">Active</string>
+    <string name="closxed">Closed</string>
 
 
     <string-array name="array_name">
@@ -193,9 +227,6 @@
         <item>November</item>
         <item>December</item>
     </string-array>
-
-
-
 
 
 </resources>

@@ -32,10 +32,14 @@ import com.triton.fintastics.activities.ChangePasswordActivity;
 import com.triton.fintastics.adapter.TransactionListAdapter;
 import com.triton.fintastics.api.APIClient;
 import com.triton.fintastics.api.RestApiInterface;
+import com.triton.fintastics.movementlist.MovementListActivity;
 import com.triton.fintastics.requestpojo.ChangePasswordRequest;
 import com.triton.fintastics.requestpojo.DashboardDataRequest;
+import com.triton.fintastics.requestpojo.FCMRequest;
 import com.triton.fintastics.responsepojo.DashboardDataResponse;
+import com.triton.fintastics.responsepojo.FCMResponse;
 import com.triton.fintastics.responsepojo.PaymentTypeListResponse;
+import com.triton.fintastics.responsepojo.Payment_type_listResponse;
 import com.triton.fintastics.responsepojo.SignupResponse;
 import com.triton.fintastics.sessionmanager.SessionManager;
 import com.triton.fintastics.transaction.AddTransactionActivity;
@@ -63,7 +67,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     View view;
-
+    private String status;
     private static final String TAG = "HomeFragment";
 
     @SuppressLint("NonConstantResourceId")
@@ -168,7 +172,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     boolean showincome = true;
     private Context mContext;
-    private List<PaymentTypeListResponse.DataBean> paymenttypeList;
+    List<Payment_type_listResponse.DataBean.Payment_typesDatabeanList> dataBeanList;
 
     HashMap<String,String> hashMap_PaymentTypevalue = new HashMap<>();
     private String strTransactionType;
@@ -184,11 +188,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String Previous7days;
     private String currentDate;
 
-
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -203,11 +205,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         Log.w(TAG,"onCreateView-->");
         ButterKnife.bind(this,view);
-
+        FCMResponseCall();
         mContext = getActivity();
         avi_indicator.setVisibility(View.GONE);
         ll_total_expense.setVisibility(View.GONE);
-
 
         SessionManager sessionManager = new SessionManager(mContext);
         HashMap<String, String> user = sessionManager.getProfileDetails();
@@ -215,7 +216,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         String account_type = user.get(SessionManager.KEY_ACCOUNT_TYPE);
         String roll_type = user.get(SessionManager.KEY_ROLL_TYPE);
         Log.w(TAG,"userid-->"+user_id+" account_type : "+account_type+" roll_type : "+roll_type);
-
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm aa");
         String currentDateandTime12hrs = simpleDateFormat.format(new Date());
@@ -229,14 +229,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         txt_date.setText(currentDate);
         txt_transcperiod.setText("Daily");
 
-
-
         if (new ConnectionDetector(mContext).isNetworkAvailable(mContext)) {
             paymentTypeListResponseCall();
         }
-
-
-
         spr_transacation_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @SuppressLint("LogNotTimber")
             @Override
@@ -253,8 +248,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     transaction_type = strTransactionType;
                     dashboardDataResponseCall(start_date,end_date);
                 }
-
-
             }
 
             @Override
@@ -263,8 +256,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-
-
         ll_expense.setOnClickListener(this);
         ll_income.setOnClickListener(this);
 
@@ -272,11 +263,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         rl_weekly.setOnClickListener(this);
         rl_monthly.setOnClickListener(this);
         rl_annually.setOnClickListener(this);
-
-
-
-
-
         return view;
     }
 
@@ -412,12 +398,55 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 dashboardDataResponseCall(start_date,end_date);
 
                 break;
-
-
-
         }
     }
+    @SuppressLint("LogNotTimber")
+    public void FCMResponseCall()
+    {
+        avi_indicator.setVisibility(View.VISIBLE);
+        avi_indicator.smoothToShow();
+        RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
+        Call<FCMResponse> call = apiInterface.fcmresponsecall(RestUtils.getContentType(), fcmRequest());
+        Log.w(TAG,"url  :%sfcmRequestcall"+ call.request().url().toString());
+        call.enqueue(new Callback<FCMResponse>() {
 
+            @SuppressLint("LogNotTimber")
+            @Override
+            public void onResponse(@NonNull Call<FCMResponse> call, @NonNull Response<FCMResponse> response) {
+                avi_indicator.smoothToHide();
+
+                if (response.body() != null) {
+                    status = response.body().getStatus();
+                    if(200 == response.body().getCode()) {
+                        Toasty.success(mContext,response.body().getMessage(), Toast.LENGTH_SHORT, true).show();
+
+
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<FCMResponse> call, Throwable t) {
+                avi_indicator.smoothToHide();
+                Log.e("FBtoken flr", "--->" + t.getMessage());
+                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+        });
+
+    }
+    private FCMRequest fcmRequest()
+    {
+        FCMRequest fcmRequest=new FCMRequest();
+        fcmRequest.setUser_id(user_id);
+        Log.w(TAG, "FCMRequest" + new Gson().toJson(fcmRequest));
+        return fcmRequest;
+    }
     @SuppressLint("SetTextI18n")
     private void showincomeTab() {
         ll_total_expense.setVisibility(View.GONE);
@@ -444,72 +473,55 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    @SuppressLint("LogNotTimber")
-    public void paymentTypeListResponseCall(){
 
+
+    @SuppressLint("LogNotTimber")
+    private void paymentTypeListResponseCall() {
         avi_indicator.setVisibility(View.VISIBLE);
         avi_indicator.smoothToShow();
-        //Creating an object of our api interface
         RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
-        Call<PaymentTypeListResponse> call = apiInterface.paymentTypeListResponseCall(RestUtils.getContentType());
-        Log.w(TAG,"url  :%s"+ call.request().url().toString());
-
-        call.enqueue(new Callback<PaymentTypeListResponse>() {
-
-            @SuppressLint("LogNotTimber")
+        Call<Payment_type_listResponse> call = apiInterface.payment_TypeListResponseCall(RestUtils.getContentType());
+        Log.w(TAG, "getcurrencyresponsecall url  :%s" + " " + call.request().url().toString());
+        call.enqueue(new Callback<Payment_type_listResponse>() {
             @Override
-            public void onResponse(@NonNull Call<PaymentTypeListResponse> call, @NonNull Response<PaymentTypeListResponse> response) {
+            public void onResponse(Call<Payment_type_listResponse> call, Response<Payment_type_listResponse> response) {
                 avi_indicator.smoothToHide();
-
-
+                Log.w(TAG, "GetCurrencyResponse" + new Gson().toJson(response.body()));
+                Payment_type_listResponse cr = response.body();
                 if (response.body() != null) {
-                    if(200 == response.body().getCode()) {
-                        Log.w(TAG, "PaymentTypeListResponse" + new Gson().toJson(response.body()));
+                    String message = response.body().getMessage();
+                    if (200 == response.body().getCode()) {
 
-                        dashboardDataResponseCall(start_date,end_date);
                         if (response.body().getData() != null) {
-                            paymenttypeList = response.body().getData();
+                            dataBeanList = response.body().getData().getPaymenttypeList();
+                            if (dataBeanList != null && dataBeanList.size() > 0) {
+
+                                Log.w(TAG, "Size--" + dataBeanList.size());
+                                ArrayList<String> arrayList = new ArrayList<>();
+                                arrayList.add("Select Transaction Type");
+                                for (int i = 0; i < dataBeanList.size(); i++) {
+                                    String string = dataBeanList.get(i).getPayment_type();
+                                    arrayList.add(string);
+
+                                }
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, arrayList);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spr_transacation_type.setAdapter(adapter);
+
+                            }
                         }
-
-                        if (paymenttypeList != null && paymenttypeList.size() > 0) {
-                            setPaymenttype(paymenttypeList);
-                        }
-
-
                     }
                 }
-
             }
 
             @Override
-            public void onFailure(@NonNull Call<PaymentTypeListResponse> call, @NonNull  Throwable t) {
-                avi_indicator.smoothToHide();
-                Log.w(TAG,"PaymentTypeListResponse flr"+t.getMessage());
+            public void onFailure(Call<Payment_type_listResponse> call, Throwable t) {
+
             }
+
+
         });
-
     }
-    private void setPaymenttype(List<PaymentTypeListResponse.DataBean> paymenttypeList) {
-        ArrayList<String> paymenttypeArrayList = new ArrayList<>();
-        paymenttypeArrayList.add("Select Transaction Type");
-        for (int i = 0; i < paymenttypeList.size(); i++) {
-
-            String paymenttype = paymenttypeList.get(i).getPayment_type();
-            hashMap_PaymentTypevalue.put(paymenttypeList.get(i).getPayment_type(), paymenttypeList.get(i).get_id());
-
-            Log.w(TAG,"paymenttype-->"+paymenttype);
-            paymenttypeArrayList.add(paymenttype);
-
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(mContext, R.layout.spinner_item, paymenttypeArrayList);
-            spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item); // The drop down view
-            spr_transacation_type.setAdapter(spinnerArrayAdapter);
-
-
-
-        }
-    }
-
-
 
     @SuppressLint("LogNotTimber")
     private void dashboardDataResponseCall(String start_date,String end_date) {
@@ -567,8 +579,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         showErrorLoading(response.body().getMessage());
                     }
                 }
-
-
             }
 
             @Override
@@ -605,10 +615,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         alertDialogBuilder.setMessage(errormesage);
         alertDialogBuilder.setPositiveButton("ok",
                 (arg0, arg1) -> hideLoading());
-
-
-
-
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }

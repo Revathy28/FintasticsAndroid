@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.triton.fintastics.utils.RestUtils;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -89,6 +91,10 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText edt_contactno;
 
     @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.edt_currency)
+    EditText edt_currency;
+
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.btn_save)
     Button btn_save;
 
@@ -107,12 +113,14 @@ public class EditProfileActivity extends AppCompatActivity {
     private String profileimag = "";
     private String account_type;
     private String roll_type;
+    private String currency;
+    private String symbol;
     Dialog alertDialog;
 
     private final int DOB_DATE_PICKER_ID = 1;
     private int year, month, day;
 
-    private String SelectedDOBddate= "";
+    private String SelectedDOBddate = "";
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -122,11 +130,9 @@ public class EditProfileActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         avi_indicator.setVisibility(View.GONE);
         ll_mygroup.setVisibility(View.GONE);
-        Log.w(TAG,"onCreate");
+        Log.w(TAG, "onCreate");
 
         edt_contactno.setTransformationMethod(new NumericKeyBoardTransformationMethod());
-
-
 
 
         TextView txt_title = include_header.findViewById(R.id.txt_title);
@@ -145,61 +151,67 @@ public class EditProfileActivity extends AppCompatActivity {
         profileimag = user.get(SessionManager.KEY_PROFILE_IMAGE);
         referalcode = user.get(SessionManager.KEY_REF_CODE);
 
-       String firstname = user.get(SessionManager.KEY_FIRSTNAME);
-       String lastname = user.get(SessionManager.KEY_LASTNAME);
+        String firstname = user.get(SessionManager.KEY_FIRSTNAME);
+        String lastname = user.get(SessionManager.KEY_LASTNAME);
         String username = user.get(SessionManager.KEY_USERNAME);
-       SelectedDOBddate = user.get(SessionManager.KEY_DOB);
-       String emailid = user.get(SessionManager.KEY_EMAIL_ID);
-       String contactnumber = user.get(SessionManager.KEY_CONTACTNUMBER);
+        SelectedDOBddate = user.get(SessionManager.KEY_DOB);
+        String emailid = user.get(SessionManager.KEY_EMAIL_ID);
+        String contactnumber = user.get(SessionManager.KEY_CONTACTNUMBER);
         roll_type = user.get(SessionManager.KEY_ROLL_TYPE);
         account_type = user.get(SessionManager.KEY_ACCOUNT_TYPE);
-        if(roll_type != null && roll_type.equalsIgnoreCase("Admin")){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("mykey", MODE_PRIVATE);
+        currency = sharedPreferences.getString("Valueeee", "");
+        Log.w("Valueeee", currency);
+        edt_currency.setText(currency);
+
+        if (roll_type != null && roll_type.equalsIgnoreCase("Admin")) {
             ll_mygroup.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             ll_mygroup.setVisibility(View.GONE);
         }
 
         ll_mygroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),MyGrooupActivity.class));
+                startActivity(new Intent(getApplicationContext(), MyGrooupActivity.class));
 
             }
         });
 
-       Log.w(TAG,"dob : "+SelectedDOBddate);
+        Log.w(TAG, "dob : " + SelectedDOBddate);
 
-       if(SelectedDOBddate != null && !SelectedDOBddate.isEmpty()){
-           String[] getfrom = SelectedDOBddate.split("-");
-           day = Integer.parseInt(getfrom[0]);
-           month = Integer.parseInt(getfrom[1]);
-           year = Integer.parseInt(getfrom[2]);
+        if (SelectedDOBddate != null && !SelectedDOBddate.isEmpty()) {
+            String[] getfrom = SelectedDOBddate.split("-");
+            day = Integer.parseInt(getfrom[0]);
+            month = Integer.parseInt(getfrom[1]);
+            year = Integer.parseInt(getfrom[2]);
 
-           if(day != 0){
-               txt_dob_day.setText(day+"");
-           }
-           if(month != 0){
-               txt_dob_month.setText(month+"");
-           }
-           if(year != 0){
-               txt_dob_year.setText(year+"");
-           }
+            if (day != 0) {
+                txt_dob_day.setText(day + "");
+            }
+            if (month != 0) {
+                txt_dob_month.setText(month + "");
+            }
+            if (year != 0) {
+                txt_dob_year.setText(year + "");
+            }
 
-           Log.w(TAG,"dob : "+"day : "+day+" month : "+month+" year : "+year);
+            Log.w(TAG, "dob : " + "day : " + day + " month : " + month + " year : " + year);
 
 
-       }
+        }
 
-       if(username != null){
-           edt_firstname.setText(username);
-       }
-        if(lastname != null){
+        if (username != null) {
+            edt_firstname.setText(username);
+        }
+        if (lastname != null) {
             edt_lastname.setText(lastname);
         }
-        if(emailid != null){
+        if (emailid != null) {
             txt_emailid.setText(emailid);
         }
-        if(contactnumber != null){
+        if (contactnumber != null) {
             edt_contactno.setText(contactnumber);
         }
 
@@ -210,11 +222,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Fintastics");
-                String shareMessage= "Your Admin " + username + " have shared a referral code to join their group kindly find the referral code as : " + referalcode;
-                shareMessage = shareMessage +""+"\n\n";
+                String shareMessage = "Your Admin " + username + " have shared a referral code to join their group kindly find the referral code as : " + referalcode;
+                shareMessage = shareMessage + "" + "\n\n";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, "share via"));
-            } catch(Exception e) {
+            } catch (Exception e) {
                 //e.toString();
             }
         });
@@ -234,7 +246,7 @@ public class EditProfileActivity extends AppCompatActivity {
     @SuppressLint("LogNotTimber")
     @Override
     protected Dialog onCreateDialog(int id) {
-        Log.w(TAG,"onCreateDialog id : "+id);
+        Log.w(TAG, "onCreateDialog id : " + id);
         if (id == DOB_DATE_PICKER_ID) {
             // open datepicker dialog.
             // set date picker for current date
@@ -246,6 +258,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         return null;
     }
+
     private final DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener() {
 
         // when dialog box is closed, below method will be called.
@@ -254,26 +267,25 @@ public class EditProfileActivity extends AppCompatActivity {
         public void onDateSet(DatePicker view, int selectedYear,
                               int selectedMonth, int selectedDay) {
 
-            year  = selectedYear;
+            year = selectedYear;
             month = selectedMonth;
-            day   = selectedDay;
-
+            day = selectedDay;
 
 
             String strdayOfMonth;
             String strMonth;
-            int month1 =(month + 1);
-            if(day == 9 || day <9){
-                strdayOfMonth = "0"+day;
-                Log.w(TAG,"Selected dayOfMonth-->"+strdayOfMonth);
-            }else{
+            int month1 = (month + 1);
+            if (day == 9 || day < 9) {
+                strdayOfMonth = "0" + day;
+                Log.w(TAG, "Selected dayOfMonth-->" + strdayOfMonth);
+            } else {
                 strdayOfMonth = String.valueOf(day);
             }
 
-            if(month1 == 9 || month1 <9){
-                strMonth = "0"+month1;
-                Log.w(TAG,"Selected month1-->"+strMonth);
-            }else{
+            if (month1 == 9 || month1 < 9) {
+                strMonth = "0" + month1;
+                Log.w(TAG, "Selected month1-->" + strMonth);
+            } else {
                 strMonth = String.valueOf(month1);
             }
 
@@ -282,15 +294,14 @@ public class EditProfileActivity extends AppCompatActivity {
             // Show selected date
             txt_dob_day.setText(strdayOfMonth);
             txt_dob_month.setText(strMonth);
-            txt_dob_year.setText(year+"");
+            txt_dob_year.setText(year + "");
 
         }
     };
 
 
-
     public void editProfileValidator() {
-        Log.w(TAG,"editProfileValidator " + "editProfileValidator");
+        Log.w(TAG, "editProfileValidator " + "editProfileValidator");
 
         boolean can_proceed = true;
 
@@ -309,13 +320,14 @@ public class EditProfileActivity extends AppCompatActivity {
        /* else if (SelectedDOBddate != null && SelectedDOBddate.isEmpty()) {
             showErrorLoading("Please select date of birth");
             can_proceed = false;
-        }*/ else if (edt_contactno.getText().toString().trim().equals("")) {
+        }*/
+        else if (edt_contactno.getText().toString().trim().equals("")) {
             edt_contactno.setError("Please enter contact number");
             edt_contactno.requestFocus();
             can_proceed = false;
         }
 
-        Log.w(TAG,"editProfileValidator " + "can_proceed : "+can_proceed);
+        Log.w(TAG, "editProfileValidator " + "can_proceed : " + can_proceed);
 
         if (can_proceed) {
             if (new ConnectionDetector(EditProfileActivity.this).isNetworkAvailable(EditProfileActivity.this)) {
@@ -324,10 +336,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
 
-
-
     }
-
 
 
     @SuppressLint("LogNotTimber")
@@ -336,19 +345,19 @@ public class EditProfileActivity extends AppCompatActivity {
         avi_indicator.smoothToShow();
         RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
         Call<SignupResponse> call = apiInterface.UpdateProfileRequestCall(RestUtils.getContentType(), updateProfileRequest());
-        Log.w(TAG,"UpdateProfileRequestCall url  :%s"+" "+ call.request().url().toString());
+        Log.w(TAG, "UpdateProfileRequestCall url  :%s" + " " + call.request().url().toString());
 
         call.enqueue(new Callback<SignupResponse>() {
             @SuppressLint("LogNotTimber")
             @Override
             public void onResponse(@NonNull Call<SignupResponse> call, @NonNull Response<SignupResponse> response) {
                 avi_indicator.smoothToHide();
-                Log.w(TAG,"UpdateProfileRequestCall" + new Gson().toJson(response.body()));
+                Log.w(TAG, "UpdateProfileRequestCall" + new Gson().toJson(response.body()));
                 if (response.body() != null) {
 
                     if (200 == response.body().getCode()) {
-                        Toasty.success(getApplicationContext(),"Profile updated sucessfully", Toast.LENGTH_SHORT, true).show();
-                        if(response.body().getData() != null) {
+                        Toasty.success(getApplicationContext(), "Profile updated sucessfully", Toast.LENGTH_SHORT, true).show();
+                        if (response.body().getData() != null) {
                             SessionManager sessionManager = new SessionManager(EditProfileActivity.this);
                             sessionManager.setIsLogin(true);
                             sessionManager.createLoginSession(
@@ -366,7 +375,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                     response.body().getData().getProfile_img()
 
                             );
-                            startActivity(new Intent(getApplicationContext(),DashoardActivity.class));
+                            startActivity(new Intent(getApplicationContext(), DashoardActivity.class));
                             finish();
 
 
@@ -382,7 +391,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<SignupResponse> call,@NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SignupResponse> call, @NonNull Throwable t) {
                 avi_indicator.smoothToHide();
                 Log.e("UpdateProfileReq flr", "--->" + t.getMessage());
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -390,6 +399,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
     }
+
     private UpdateProfileRequest updateProfileRequest() {
         /*
          * _id : 617a5371299cf71790053363
@@ -407,7 +417,7 @@ public class EditProfileActivity extends AppCompatActivity {
          * profile_img :
          */
 
-        UpdateProfileRequest updateProfileRequest= new UpdateProfileRequest();
+        UpdateProfileRequest updateProfileRequest = new UpdateProfileRequest();
         updateProfileRequest.set_id(userid);
         updateProfileRequest.setUsername(username);
         updateProfileRequest.setPassword(password);
@@ -421,26 +431,28 @@ public class EditProfileActivity extends AppCompatActivity {
         updateProfileRequest.setRoll_type(roll_type);
         updateProfileRequest.setParent_of(referalcode);
         updateProfileRequest.setProfile_img(profileimag);
+        updateProfileRequest.setCurrency(currency);
+        updateProfileRequest.setSymbol(symbol);
 
-        Log.w(TAG,"updateProfileRequest "+ new Gson().toJson(updateProfileRequest));
+        Log.w(TAG, "updateProfileRequest " + new Gson().toJson(updateProfileRequest));
         return updateProfileRequest;
     }
-    public void showErrorLoading(String errormesage){
+
+    public void showErrorLoading(String errormesage) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(errormesage);
         alertDialogBuilder.setPositiveButton("ok",
                 (arg0, arg1) -> hideLoading());
 
 
-
-
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-    public void hideLoading(){
+
+    public void hideLoading() {
         try {
             alertDialog.dismiss();
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }

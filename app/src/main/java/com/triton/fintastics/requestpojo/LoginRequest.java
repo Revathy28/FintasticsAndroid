@@ -9,6 +9,7 @@ public class LoginRequest {
 
     private String user_email;
     private String password;
+    private String account_type;
 
     public String getUser_email() {
         return user_email;
@@ -24,5 +25,13 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAccount_type() {
+        return account_type;
+    }
+
+    public void setAccount_type(String account_type) {
+        this.account_type = account_type;
     }
 }

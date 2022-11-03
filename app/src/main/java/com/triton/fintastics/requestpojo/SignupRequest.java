@@ -18,6 +18,8 @@ public class SignupRequest {
     private String mobile_type;
     private String parent_of;
     private String account_type ;
+    private String currency;
+    private String symbol;
 
     public String getAccount_type() {
         return account_type;
@@ -67,5 +69,18 @@ public class SignupRequest {
         this.parent_of = parent_of;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getSymbol(){return symbol;}
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
 }

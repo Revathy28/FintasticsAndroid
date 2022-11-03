@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.LoginActivity"
-    android:background="@drawable/vector">
+    android:background="@drawable/vector"
+    tools:context=".activities.LoginActivity">
 
     <LinearLayout
         android:id="@+id/headerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="vertical">
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollablContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/footerView"
-        android:layout_below="@+id/headerView" >
+        android:layout_below="@+id/headerView">
 
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -137,25 +136,36 @@
 
                             </ImageView>
 
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/password"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30dp"
+                                app:expandedHintEnabled="false"
+                                app:hintEnabled="true"
+                                app:passwordToggleEnabled="true"
+                                app:placeholderText="Password"
+                                app:placeholderTextColor="@color/light_grey">
 
-                            <EditText
-                                android:id="@+id/edt_passwd"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_10dp"
-                                android:layout_marginLeft="@dimen/_10dp"
-                                android:layout_weight="1"
-                                android:background="@null"
-                                android:cursorVisible="true"
-                                android:fontFamily="@font/roboto_medium"
-                                android:hint="@string/password"
-                                android:imeOptions="actionDone"
-                                android:inputType="textPassword"
-                                android:lines="1"
-                                android:textColor="@color/txt_black"
-                                android:textColorHint="@color/hint_color_login"
-                                android:textCursorDrawable="@drawable/rectangular_corner_bg_grey"
-                                android:textSize="16sp" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/edt_passwd"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10dp"
+                                    android:layout_marginLeft="@dimen/_10dp"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:cursorVisible="true"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPassword"
+                                    android:lines="1"
+                                    android:textColor="@color/txt_black"
+                                    android:textColorHint="@color/hint_color_login"
+                                    android:textCursorDrawable="@drawable/rectangular_corner_bg_grey"
+                                    android:textSize="16sp" />
+
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
 
@@ -192,9 +202,9 @@
                                 android:textSize="@dimen/_12sp" />
 
                             <RelativeLayout
+                                android:id="@+id/rl_forgetpassword"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/rl_forgetpassword">
+                                android:layout_height="match_parent">
 
                                 <TextView
                                     android:id="@+id/txt_lbl_signin2"
@@ -204,7 +214,7 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_centerInParent="true"
                                     android:fontFamily="@font/roboto_regular"
-                                    android:text="@string/forget_password"
+                                    android:text="@string/forgot_password"
                                     android:textColor="@color/white"
                                     android:textIsSelectable="false"
                                     android:textSize="@dimen/_12sp" />
@@ -238,6 +248,7 @@
                     android:layout_marginTop="@dimen/_20dp"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
+
                     android:onClick="gotosignup"
                     android:padding="@dimen/_5dp"
                     android:text="@string/create_an_account"
@@ -260,8 +271,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avi_indicator"

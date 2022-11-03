@@ -6,9 +6,11 @@ import com.triton.fintastics.requestpojo.BudgetGetlistRequest;
 import com.triton.fintastics.requestpojo.ChangePasswordRequest;
 import com.triton.fintastics.requestpojo.DashboardDataRequest;
 import com.triton.fintastics.requestpojo.EmailOTPRequest;
+import com.triton.fintastics.requestpojo.FCMRequest;
 import com.triton.fintastics.requestpojo.FetchChildDetailsRequest;
 import com.triton.fintastics.requestpojo.LoginRequest;
 import com.triton.fintastics.requestpojo.MovementReportDataRequest;
+import com.triton.fintastics.requestpojo.ProfileUpdateRequest;
 import com.triton.fintastics.requestpojo.ReferralCodeRequest;
 import com.triton.fintastics.requestpojo.ReportDataRequest;
 import com.triton.fintastics.requestpojo.SignupRequest;
@@ -20,10 +22,14 @@ import com.triton.fintastics.responsepojo.AccountSummaryResponse;
 import com.triton.fintastics.responsepojo.BudgetGetlistResponse;
 import com.triton.fintastics.responsepojo.DashboardDataResponse;
 import com.triton.fintastics.responsepojo.EmailOTPResponse;
+import com.triton.fintastics.responsepojo.FCMResponse;
 import com.triton.fintastics.responsepojo.FetchChildDetailsResponse;
+import com.triton.fintastics.responsepojo.GetCurrencyResponse;
 import com.triton.fintastics.responsepojo.IncomeReportResponse;
 import com.triton.fintastics.responsepojo.LoginResponse;
 import com.triton.fintastics.responsepojo.PaymentTypeListResponse;
+import com.triton.fintastics.responsepojo.Payment_type_listResponse;
+import com.triton.fintastics.responsepojo.ProfileUpdateResponse;
 import com.triton.fintastics.responsepojo.SignupResponse;
 import com.triton.fintastics.responsepojo.SuccessResponse;
 import com.triton.fintastics.responsepojo.TransactionGetBalanceResponse;
@@ -49,7 +55,10 @@ public interface RestApiInterface {
     @POST("userdetails/check_parent_code")
     Call<SuccessResponse> verifyReferralCodeResponseCall(@Header("Content-Type") String type, @Body ReferralCodeRequest referralCodeRequest);
 
+/*Currency*/
 
+    @GET("payment_type/getlist")
+    Call<GetCurrencyResponse> getcurrencyresponsecall();
     /*Signup create*/
     @POST("userdetails/create")
     Call<SignupResponse> signupResponseCall(@Header("Content-Type") String type, @Body SignupRequest signupRequest);
@@ -71,6 +80,9 @@ public interface RestApiInterface {
     @GET("payment_type/getlist")
     Call<PaymentTypeListResponse> paymentTypeListResponseCall(@Header("Content-Type") String type);
 
+    @GET("payment_type/getlist")
+    Call<Payment_type_listResponse> payment_TypeListResponseCall(@Header("Content-Type") String type);
+
     /*Transaction get balance*/
     @POST("transaction/get_balance_amount")
     Call<TransactionGetBalanceResponse> transactionGetBalanceAmountRequestCall(@Header("Content-Type") String type, @Body UserIdRequest userIdRequest);
@@ -83,7 +95,6 @@ public interface RestApiInterface {
     /*Update profile*/
     @POST("userdetails/mobile/update/profile")
     Call<SignupResponse> UpdateProfileRequestCall(@Header("Content-Type") String type, @Body UpdateProfileRequest updateProfileRequest);
-
 
     /*Dashboard Data*/
     @POST("transaction/dashboard/data")
@@ -127,5 +138,9 @@ public interface RestApiInterface {
     @POST("userdetails/block_unblock_user")
     Call<SuccessResponse> blockunblockuserResponseCall(@Header("Content-Type") String type, @Body BlockUnblockRequest blockUnblockRequest );
 
+    @POST("userdetails/mobile/update/fb_token")
+    Call<FCMResponse>fcmresponsecall(@Header("Content-Type") String type, @Body FCMRequest fcmRequest);
 
+@POST("userdetails/mobile/update/profile")
+    Call<ProfileUpdateResponse>profileupdateResponseCall(@Header("Content-Type") String type, @Body ProfileUpdateRequest profileUpdateRequest);
 }

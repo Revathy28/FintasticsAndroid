@@ -31,6 +31,8 @@ public class UpdateProfileRequest {
     private String roll_type;
     private String parent_of;
     private String profile_img;
+    private String currency;
+    private String symbol;
 
     public String get_id() {
         return _id;
@@ -134,5 +136,21 @@ public class UpdateProfileRequest {
 
     public void setProfile_img(String profile_img) {
         this.profile_img = profile_img;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }

@@ -140,6 +140,17 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+<androidx.legacy.widget.Space
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_30dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Version -1.5.03.22"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"/>
 
 
         </LinearLayout>

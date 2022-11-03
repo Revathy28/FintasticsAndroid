@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.triton.fintastics" >
+    package="com.triton.fintastics">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".accountsummary.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +22,36 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
+        <activity
+            android:name=".TestActivity"
+            android:theme="@style/Theme.AppCompat.DayNight"
+            android:exported="true">
 
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+        <activity
+            android:name=".budgetary.PeriodicBudgetActiveClosedActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/BudgetaryTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".budgetary.AddBudgetaryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/BudgetaryTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".budgetary.BudgetDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewAppTheme"
+            tools:ignore="LockedOrientationActivity"></activity>
         <activity
             android:name=".chat.ChatActivity"
             android:exported="true"
@@ -25,7 +62,7 @@
             android:name=".budgetary.BudgetaryActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NewAppTheme"
+            android:theme="@style/BudgetaryTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".movementlist.MovementListShowDataActivity"
@@ -96,11 +133,12 @@
             android:theme="@style/NewAppTheme"
             android:windowSoftInputMode="adjustPan">
 
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
         </activity>
         <activity
@@ -115,7 +153,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".familyaccount.EditProfileActivity"
             android:exported="true"
@@ -145,7 +182,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -163,7 +200,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".activities.ForgetPasswordActivity"
             android:screenOrientation="portrait"
@@ -174,10 +210,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-
-
-        <!--transaction-->
+            android:windowSoftInputMode="adjustPan" /> <!-- transaction -->
         <activity
             android:name=".transaction.AddTransactionActivity"
             android:screenOrientation="portrait"
@@ -188,6 +221,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

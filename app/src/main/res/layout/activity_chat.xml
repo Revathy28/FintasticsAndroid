@@ -59,6 +59,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/ic_smile"
                 android:layout_marginStart="@dimen/_10dp"
+                android:visibility="gone"
                 android:layout_marginLeft="@dimen/_10dp" />
 
             <EditText
@@ -85,13 +86,14 @@
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:gravity="end|center">
+
                <ImageView
-                   android:layout_width="@dimen/_40dp"
-                   android:layout_height="wrap_content"
+                   android:layout_width="60dp"
+                   android:layout_height="60dp"
                    android:layout_gravity="end|center"
-                   android:background="@drawable/ic_camera"
                    android:layout_marginEnd="@dimen/_10dp"
-                   android:layout_marginRight="@dimen/_10dp" />
+                   android:layout_marginRight="@dimen/_10dp"
+                   android:background="@drawable/send" />
 
            </RelativeLayout>
 

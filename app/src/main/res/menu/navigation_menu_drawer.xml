@@ -4,6 +4,13 @@
 
     <group
         android:id="@+id/group1">
+
+        <item android:id="@+id/nav_item_on"
+            android:icon="@drawable/icn_budgetary"
+            android:title="Manage Subscription"/>
+
+
+
         <item android:id="@+id/nav_item_one"
             android:icon="@drawable/icn_budgetary"
             android:title="@string/add_transaction"/>
@@ -41,28 +48,34 @@
             >
 
             <menu>
+
                 <item
                     android:id="@+id/nav_item_ten"
                     android:icon="@drawable/icn_family"
                     android:title="@string/edit_profile"
                     />
-        <item android:id="@+id/nav_item_seven"
-            android:icon="@drawable/icn_change_password"
-            android:title="@string/change_password"
-           />
 
-            <item
-                android:id="@+id/nav_item_eight"
-                android:icon="@drawable/icn_budgetary"
-                android:title="@string/budgetary"
-               />
+                <item android:id="@+id/nav_item_seven"
+                    android:icon="@drawable/icn_change_password"
+                    android:title="@string/change_password"
+                   />
 
-        <item android:id="@+id/nav_item_nine"
-            android:icon="@drawable/icn_chat_icon"
-            android:title="@string/chat"
-            android:visible="true"/>
+                <item android:id="@+id/nav_item_seve"
+                    android:icon="@drawable/icn_change_password"
+                    android:title="Notification"
+                    />
 
+                <item
+                    android:id="@+id/nav_item_eight"
+                    android:icon="@drawable/icn_budgetary"
+                    android:title="@string/budgetary"
+                   />
 
+                <item
+                    android:id="@+id/nav_item_nine"
+                    android:icon="@drawable/icn_chat_icon"
+                    android:title="@string/chat"
+                    />
 
                 <item
                     android:id="@+id/nav_item_eleventh"

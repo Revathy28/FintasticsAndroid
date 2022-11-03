@@ -37,7 +37,7 @@ public class ExpenditureReportActivity extends AppCompatActivity implements View
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.include_header)
     View include_header;
-
+    String Place;
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.rb_alldays)
     RadioButton rb_alldays;
@@ -167,6 +167,18 @@ public class ExpenditureReportActivity extends AppCompatActivity implements View
                 img_ondate.setVisibility(View.VISIBLE);
                 img_fromdate.setVisibility(View.INVISIBLE);
                 img_todate.setVisibility(View.INVISIBLE);
+
+                Calendar c = Calendar.getInstance();
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                int month = c.get(Calendar.MONTH)+1;
+                int year = c.get(Calendar.YEAR);
+
+                if (month<10){
+                    Place = "0"+ month;
+                }
+
+                String date = day + "-" + (Place) + "-" + year;
+                txt_ondate.setText(date);
                 break;
             case R.id.rb_fromdate:
                 txt_ondate.setText("");

@@ -46,8 +46,7 @@
                     android:id="@+id/spr_transacation_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                  />
+                    android:background="@android:color/transparent" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -61,11 +60,45 @@
 
             </RelativeLayout>
 
+            <!-- Vector -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <View
+                    android:id="@+id/vector"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/income_tab_bgnd" />
+
+                <View
+                    android:id="@+id/vector1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/expense_tab_bgnd" />
+            </LinearLayout>
+
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45dp"
                 android:layout_marginTop="@dimen/_20dp"
                 android:orientation="horizontal"
+                android:visibility="visible"
                 app:cardCornerRadius="0dp"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="false">
@@ -74,27 +107,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:id="@+id/ll_income"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/_20dp"
-                        android:layout_marginLeft="@dimen/_20dp">
+                        android:layout_marginLeft="@dimen/_20dp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/txt_lbl_incometab"
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:background="@drawable/rectangle_corner_bg_thicblue"
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="center"
                             android:text="@string/income"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_14sp"
-                            android:background="@drawable/rectangle_corner_bg_thicblue"
-                            />
+                            android:textSize="@dimen/_14sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/ll_expense"
                         android:layout_width="wrap_content"
@@ -107,13 +141,12 @@
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:background="@color/white"
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="center"
                             android:text="@string/expense"
                             android:textColor="@color/text_black"
-                            android:textSize="@dimen/_14sp"
-                            android:background="@color/white"
-                            />
+                            android:textSize="@dimen/_14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -430,8 +463,37 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_transaction"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                   />
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:visibility="gone"
+                    android:gravity="right">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="188dp"
+                        app:srcCompat="@drawable/alert_notification" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="-15dp"
+                        android:layout_marginTop="180dp"
+                        android:background="@drawable/custombutton1"
+                        android:paddingTop="5sp"
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/txt_no_records"
@@ -704,7 +766,6 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
 
         </LinearLayout>
     </ScrollView>

@@ -16,7 +16,7 @@ public class APIClient {
 
 
      /*dev*/
-    public static String BASE_URL = "http://52.24.145.80:3000/api/";
+    public static String BASE_URL = "http://35.88.62.26:3000/api/";
     public static String IMAGE_BASE_URL = "http://52.24.145.80:3000/";
 
     /*Banner Image*/

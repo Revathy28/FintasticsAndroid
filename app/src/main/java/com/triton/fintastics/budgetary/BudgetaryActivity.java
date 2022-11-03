@@ -2,9 +2,13 @@ package com.triton.fintastics.budgetary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,7 +18,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.triton.fintastics.R;
 import com.triton.fintastics.activities.DashoardActivity;
@@ -22,6 +28,8 @@ import com.triton.fintastics.adapter.AccountSummaryListAdapter;
 import com.triton.fintastics.adapter.ExpenseListAdapter;
 import com.triton.fintastics.api.APIClient;
 import com.triton.fintastics.api.RestApiInterface;
+import com.triton.fintastics.budgetary.fragment.OneTimeFragment;
+import com.triton.fintastics.budgetary.fragment.PeriodicFragment;
 import com.triton.fintastics.requestpojo.BudgetGetlistRequest;
 import com.triton.fintastics.requestpojo.UserIdRequest;
 import com.triton.fintastics.responsepojo.AccountSummaryResponse;
@@ -34,6 +42,7 @@ import org.eazegraph.lib.charts.StackedBarChart;
 import org.eazegraph.lib.models.BarModel;
 import org.eazegraph.lib.models.StackedBarModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,8 +59,6 @@ public class BudgetaryActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.include_header)
     View include_header;
-
-
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.avi_indicator)
@@ -75,6 +82,13 @@ public class BudgetaryActivity extends AppCompatActivity {
 
     private String user_id;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.tablayout)
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,19 +101,23 @@ public class BudgetaryActivity extends AppCompatActivity {
         SessionManager session = new SessionManager(getApplicationContext());
         HashMap<String, String> user = session.getProfileDetails();
         user_id = user.get(SessionManager.KEY_ID);
+        Log.d("user_id",user_id);
 
 
         ImageView img_back = include_header.findViewById(R.id.img_back);
         TextView txt_title = include_header.findViewById(R.id.txt_title);
         txt_title.setText(getResources().getString(R.string.budgetary));
 
+        setupViewPager(viewPager);
+
         if(user_id != null){
-            budgetGetlistRequestCall();
+           // budgetGetlistRequestCall();
         }
 
 
         //mStackedBarChart.startAnimation();
 
+        tabLayout.setupWithViewPager(viewPager);
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,12 +125,51 @@ public class BudgetaryActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+
     }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(getApplicationContext(), DashoardActivity.class));
         finish();
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new PeriodicFragment(), "Periodic");
+        adapter.addFragment(new OneTimeFragment(), "One Time");
+        viewPager.setAdapter(adapter);
+    }
+
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
     @SuppressLint("LogNotTimber")
