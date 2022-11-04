@@ -4,6 +4,7 @@ package com.triton.fintastics.api;
 import com.triton.fintastics.requestpojo.BlockUnblockRequest;
 import com.triton.fintastics.requestpojo.BudgetGetlistRequest;
 import com.triton.fintastics.requestpojo.ChangePasswordRequest;
+import com.triton.fintastics.requestpojo.Dash_trans_DetailsRequest;
 import com.triton.fintastics.requestpojo.DashboardDataRequest;
 import com.triton.fintastics.requestpojo.EmailOTPRequest;
 import com.triton.fintastics.requestpojo.FCMRequest;
@@ -20,6 +21,7 @@ import com.triton.fintastics.requestpojo.UserIdRequest;
 import com.triton.fintastics.requestpojo.YearsListRequest;
 import com.triton.fintastics.responsepojo.AccountSummaryResponse;
 import com.triton.fintastics.responsepojo.BudgetGetlistResponse;
+import com.triton.fintastics.responsepojo.Dash_trans_DetailsResponse;
 import com.triton.fintastics.responsepojo.DashboardDataResponse;
 import com.triton.fintastics.responsepojo.EmailOTPResponse;
 import com.triton.fintastics.responsepojo.FCMResponse;
@@ -97,8 +99,11 @@ public interface RestApiInterface {
     Call<SignupResponse> UpdateProfileRequestCall(@Header("Content-Type") String type, @Body UpdateProfileRequest updateProfileRequest);
 
     /*Dashboard Data*/
+//    @POST("transaction/dashboard/data")
+//    Call<DashboardDataResponse> dashboardDataResponseCall(@Header("Content-Type") String type, @Body DashboardDataRequest dashboardDataRequest);
+
     @POST("transaction/dashboard/data")
-    Call<DashboardDataResponse> dashboardDataResponseCall(@Header("Content-Type") String type, @Body DashboardDataRequest dashboardDataRequest);
+    Call<Dash_trans_DetailsResponse> dashboardDataResponseCall(@Header("Content-Type") String type, @Body Dash_trans_DetailsRequest dashboardDataRequest);
 
     /*Years list*/
     @POST("userdetails/year_list")

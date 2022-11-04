@@ -146,7 +146,7 @@ public class DashboardNavigationDrawer extends AppCompatActivity implements View
 
 
         if (user_id != null) {
-            dashboardDataResponseCall();
+           // dashboardDataResponseCall();
         }
 
 
@@ -834,64 +834,63 @@ public class DashboardNavigationDrawer extends AppCompatActivity implements View
 
     }
 
-    @SuppressLint("LogNotTimber")
-    private void dashboardDataResponseCall() {
-       /* avi_indicator.setVisibility(View.VISIBLE);
-        avi_indicator.smoothToShow();*/
-        RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
-        Call<DashboardDataResponse> call = apiInterface.dashboardDataResponseCall(RestUtils.getContentType(), dashboardDataRequest());
-        Log.w(TAG, "DashboardDataResponse url  :%s" + " " + call.request().url().toString());
-
-        call.enqueue(new Callback<DashboardDataResponse>() {
-            @SuppressLint({"LogNotTimber", "SetTextI18n"})
-            @Override
-            public void onResponse(@NonNull Call<DashboardDataResponse> call, @NonNull Response<DashboardDataResponse> response) {
-                //avi_indicator.smoothToHide();
-                Log.w(TAG, "DashboardDataResponse" + new Gson().toJson(response.body()));
-                if (response.body() != null) {
-
-                    if (200 == response.body().getCode()) {
-                        if (response.body().getUser_count() != null) {
-                            int total_count = response.body().getUser_count().getTotal_count();
-                            nav_Menu.findItem(R.id.nav_item_nine).setVisible(total_count > 1);
-                        }
-
-
-                    }
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<DashboardDataResponse> call, @NonNull Throwable t) {
-                //  avi_indicator.smoothToHide();
-                Log.e("DashboardDataRe flr", "--->" + t.getMessage());
-            }
-        });
-
-    }
-
-    private DashboardDataRequest dashboardDataRequest() {
-        /*
-         * transaction_type : Cash
-         * transaction_way : Debit
-         * user_id : 617a7c37eeb3a520395e2f15
-         * start_date : 23-10-2021
-         * end_date : 23-10-2021
-         */
-
-
-        DashboardDataRequest dashboardDataRequest = new DashboardDataRequest();
-        dashboardDataRequest.setTransaction_type("");
-        dashboardDataRequest.setTransaction_way("");
-        dashboardDataRequest.setUser_id(user_id);
-        dashboardDataRequest.setStart_date("");
-        dashboardDataRequest.setEnd_date("");
-
-        Log.w(TAG, "dashboardDataRequest " + new Gson().toJson(dashboardDataRequest));
-        return dashboardDataRequest;
-    }
+//    private void dashboardDataResponseCall() {
+//       /* avi_indicator.setVisibility(View.VISIBLE);
+//        avi_indicator.smoothToShow();*/
+//        RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
+//        Call<DashboardDataResponse> call = apiInterface.dashboardDataResponseCall(RestUtils.getContentType(), dashboardDataRequest());
+//        Log.w(TAG, "DashboardDataResponse url  :%s" + " " + call.request().url().toString());
+//
+//        call.enqueue(new Callback<DashboardDataResponse>() {
+//            @SuppressLint({"LogNotTimber", "SetTextI18n"})
+//            @Override
+//            public void onResponse(@NonNull Call<DashboardDataResponse> call, @NonNull Response<DashboardDataResponse> response) {
+//                //avi_indicator.smoothToHide();
+//                Log.w(TAG, "DashboardDataResponse" + new Gson().toJson(response.body()));
+//                if (response.body() != null) {
+//
+//                    if (200 == response.body().getCode()) {
+//                        if (response.body().getUser_count() != null) {
+//                            int total_count = response.body().getUser_count().getTotal_count();
+//                            nav_Menu.findItem(R.id.nav_item_nine).setVisible(total_count > 1);
+//                        }
+//
+//
+//                    }
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<DashboardDataResponse> call, @NonNull Throwable t) {
+//                //  avi_indicator.smoothToHide();
+//                Log.e("DashboardDataRe flr", "--->" + t.getMessage());
+//            }
+//        });
+//
+//    }
+//
+//    private DashboardDataRequest dashboardDataRequest() {
+//        /*
+//         * transaction_type : Cash
+//         * transaction_way : Debit
+//         * user_id : 617a7c37eeb3a520395e2f15
+//         * start_date : 23-10-2021
+//         * end_date : 23-10-2021
+//         */
+//
+//
+//        DashboardDataRequest dashboardDataRequest = new DashboardDataRequest();
+//        dashboardDataRequest.setTransaction_type("");
+//        dashboardDataRequest.setTransaction_way("");
+//        dashboardDataRequest.setUser_id(user_id);
+//        dashboardDataRequest.setStart_date("");
+//        dashboardDataRequest.setEnd_date("");
+//
+//        Log.w(TAG, "dashboardDataRequest " + new Gson().toJson(dashboardDataRequest));
+//        return dashboardDataRequest;
+//    }
 
 
 }

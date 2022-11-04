@@ -188,6 +188,9 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
         if (month<10){
             Place = "0"+ month;
         }
+        else {
+            Place = String.valueOf(month);
+        }
 
         String da = String.valueOf(day);
         String yy = String.valueOf(year);
@@ -836,18 +839,18 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
         return transactionCreateRequest;
     }
 
-//    public void showErrorLoading(String errormesage){
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//        alertDialogBuilder.setMessage(errormesage);
-//        alertDialogBuilder.setPositiveButton("ok",
-//                (arg0, arg1) -> hideLoading());
-//
-//
-//
-//
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
-//    }
+    public void showErrorLoading(String errormesage){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(errormesage);
+        alertDialogBuilder.setPositiveButton("ok",
+                (arg0, arg1) -> hideLoading());
+
+
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
     public void hideLoading(){
         try {
             alertDialog.dismiss();
@@ -929,7 +932,7 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
             if(validdTransactionType()){
                 if(validdDescType()){
                     if (SelectedTransactionddate != null && SelectedTransactionddate.isEmpty()) {
-                      ///  showErrorLoading("Please select date of transaction");
+                        showErrorLoading("Please select date of transaction");
                         can_proceed = false;
                     } else if (edt_amount.getText().toString().trim().equals("")) {
                         edt_amount.setError("Please enter amount");
@@ -944,6 +947,12 @@ public class VoiceAddTransactionActivity extends AppCompatActivity implements Vi
         if (can_proceed) {
             if (new ConnectionDetector(VoiceAddTransactionActivity.this).isNetworkAvailable(VoiceAddTransactionActivity.this)) {
                 transactionCreateRequestCall();
+                Log.d("ddddd","ffff");
+
+            }
+            else {
+
+                Log.d("pppp","ffff");
             }
         }
 

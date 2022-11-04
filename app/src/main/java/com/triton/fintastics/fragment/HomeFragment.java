@@ -1,5 +1,7 @@
 package com.triton.fintastics.fragment;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -29,15 +31,19 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.triton.fintastics.R;
 import com.triton.fintastics.activities.ChangePasswordActivity;
+import com.triton.fintastics.adapter.Dash_trans_DetailsAdapter;
 import com.triton.fintastics.adapter.TransactionListAdapter;
 import com.triton.fintastics.api.APIClient;
 import com.triton.fintastics.api.RestApiInterface;
 import com.triton.fintastics.movementlist.MovementListActivity;
 import com.triton.fintastics.requestpojo.ChangePasswordRequest;
+import com.triton.fintastics.requestpojo.Dash_trans_DetailsRequest;
 import com.triton.fintastics.requestpojo.DashboardDataRequest;
 import com.triton.fintastics.requestpojo.FCMRequest;
+import com.triton.fintastics.responsepojo.Dash_trans_DetailsResponse;
 import com.triton.fintastics.responsepojo.DashboardDataResponse;
 import com.triton.fintastics.responsepojo.FCMResponse;
+import com.triton.fintastics.responsepojo.LoginResponse;
 import com.triton.fintastics.responsepojo.PaymentTypeListResponse;
 import com.triton.fintastics.responsepojo.Payment_type_listResponse;
 import com.triton.fintastics.responsepojo.SignupResponse;
@@ -94,7 +100,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.spr_transacation_type)
     Spinner spr_transacation_type;
 
-
+    List<Dash_trans_DetailsResponse.DataBean> breedTypedataBeanList;
+    Dash_trans_DetailsAdapter activityBasedListAdapter;
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.rv_transaction)
@@ -179,7 +186,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Object strTransactionTypeId;
 
     private String transaction_type = "";
-    private String transaction_way = "Credit";
     private String user_id;
     private String start_date;
     private String end_date;
@@ -229,6 +235,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         txt_date.setText(currentDate);
         txt_transcperiod.setText("Daily");
 
+      //  dashboardDataResponseCall(transaction_type,transaction_way,user_id,"",end_date,"");
+
+     //   Log.d("value",transaction_type + "," + transaction_way + "," + user_id + "," + start_date + "," + end_date);
+
+
         if (new ConnectionDetector(mContext).isNetworkAvailable(mContext)) {
             paymentTypeListResponseCall();
         }
@@ -246,7 +257,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     transaction_type = "";
                 }else{
                     transaction_type = strTransactionType;
-                    dashboardDataResponseCall(start_date,end_date);
+
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                    String currentDateandTime12hrs = simpleDateFormat1.format(new Date());
+
+                    String transaction_way = "Credit";
+
+                    dashboardDataResponseCall(transaction_type,transaction_way,user_id,"01-11-2022 02:48 pm",currentDateandTime12hrs,"Asia/Kolkata");
+
+                    Log.d("value",transaction_type + "," + transaction_way + "," + user_id + "," + start_date + "," + end_date);
+
                 }
             }
 
@@ -266,19 +286,112 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    private void dashboardDataResponseCall(String transaction_type, String transaction_way, String user_id, String start_date, String end_date, String time_zone) {
+        RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
+        Call<Dash_trans_DetailsResponse> call = apiInterface.dashboardDataResponseCall(RestUtils.getContentType(), serviceRequest(transaction_type,transaction_way,user_id,start_date,end_date,time_zone));
+        Log.w(TAG, "Jobno Find Response url  :%s" + " " + call.request().url().toString());
+        call.enqueue(new Callback<Dash_trans_DetailsResponse>() {
+            @SuppressLint("LogNotTimber")
+            @Override
+            public void onResponse(@NonNull Call<Dash_trans_DetailsResponse> call, @NonNull Response<Dash_trans_DetailsResponse> response) {
+                Log.w(TAG, "Jobno Find Response" + new Gson().toJson(response.body()));
+
+                if (response.body() != null) {
+
+                  String  message = response.body().getMessage();
+                    Log.d("message", message);
+
+                    if (200 == response.body().getCode()) {
+                        if (response.body().getData() != null) {
+                            breedTypedataBeanList = response.body().getData();
+
+                            setView(breedTypedataBeanList);
+                            Log.d("dataaaaa", String.valueOf(breedTypedataBeanList));
+
+                            rv_transaction.setVisibility(View.VISIBLE);
+                            txt_no_records.setVisibility(View.GONE);
+                        }
+                        else {
+
+                            rv_transaction.setVisibility(View.GONE);
+                            txt_no_records.setVisibility(View.VISIBLE);
+                        }
+
+                    } else if (400 == response.body().getCode()) {
+                        if (response.body().getMessage() != null && response.body().getMessage().equalsIgnoreCase("There is already a user registered with this email id. Please add new email id")) {
+
+                        }
+                    } else {
+
+                        Toasty.warning(getContext(), "" + response.body().getMessage(), Toasty.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Dash_trans_DetailsResponse> call, @NonNull Throwable t) {
+                Log.e("Jobno Find ", "--->" + t.getMessage());
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private Dash_trans_DetailsRequest serviceRequest(String transaction_type, String transaction_way, String user_id, String start_date, String end_date, String time_zone) {
+        Dash_trans_DetailsRequest service = new Dash_trans_DetailsRequest();
+        service.setTransaction_type(transaction_type);
+        service.setTransaction_way(transaction_way);
+        service.setUser_id(user_id);
+        service.setStart_date(start_date);
+        service.setEnd_date(end_date);
+        service.setTimezone(time_zone);
+        Log.w(TAG, "Jobno Find Request " + new Gson().toJson(service));
+        return service;
+    }
+
+    private void setView(List<Dash_trans_DetailsResponse.DataBean> dataBeanList) {
+        rv_transaction.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
+        rv_transaction.setItemAnimator(new DefaultItemAnimator());
+        activityBasedListAdapter = new Dash_trans_DetailsAdapter(getContext(), dataBeanList);
+        rv_transaction.setAdapter(activityBasedListAdapter);
+    }
+
     @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.ll_expense:
-                showExpenseTab();
-                dashboardDataResponseCall(start_date,end_date);
+                ll_total_expense.setVisibility(View.VISIBLE);
+                ll_total_income.setVisibility(View.GONE);
+                String transaction_way = "Debit";
+                showincome = false;
+                txt_lbl_expensetab.setBackgroundResource(R.drawable.rectangle_corner_bg_thicblue);
+                txt_lbl_incometab.setBackgroundResource(R.color.white);
+                txt_lbl_incometab.setTextColor(getResources().getColor(R.color.text_black));
+                txt_lbl_expensetab.setTextColor(getResources().getColor(R.color.white));
+                SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                String currentDateandTime12hrs = simpleDateFormat1.format(new Date());
+
+                dashboardDataResponseCall(transaction_type,transaction_way,user_id,"01-11-2022 02:48 pm",currentDateandTime12hrs,"Asia/Kolkata");
+
                 break;
 
             case R.id.ll_income:
-                showincomeTab();
-                dashboardDataResponseCall(start_date,end_date);
+                ll_total_expense.setVisibility(View.GONE);
+                ll_total_income.setVisibility(View.VISIBLE);
+                String transaction_way1 = "Credit";
+                showincome = true;
+                txt_lbl_expensetab.setBackgroundResource(R.color.white);
+                txt_lbl_incometab.setBackgroundResource(R.drawable.rectangle_corner_bg_thicblue);
+                txt_lbl_incometab.setTextColor(getResources().getColor(R.color.white));
+                txt_lbl_expensetab.setTextColor(getResources().getColor(R.color.text_black));
+                SimpleDateFormat simpleDateFormat11 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                String currentDateandTime12hrs1 = simpleDateFormat11.format(new Date());
+
+                dashboardDataResponseCall(transaction_type,transaction_way1,user_id,"01-11-2022 02:48 pm",currentDateandTime12hrs1,"Asia/Kolkata");
+
                 break;
             case R.id.rl_daily:
                 txt_date.setText(currentDate);
@@ -294,7 +407,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Log.w(TAG,"rl_daily currentdate : "+currentdate);
                 start_date = currentdate;
                 end_date = currentdate;
-                dashboardDataResponseCall(start_date,end_date);
+                SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                String currentDateandTime12hrs2 = simpleDateFormat2.format(new Date());
+
+             //   dashboardDataResponseCall(transaction_type,transaction_way,user_id,"01-11-2022 02:48 pm",currentDateandTime12hrs2,"Asia/Kolkata");
+
                 break;
 
             case R.id.rl_weekly:
@@ -334,7 +451,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 start_date = currentdate;
                 end_date = Previous7days;
 
-                dashboardDataResponseCall(end_date,start_date);
+                SimpleDateFormat simpleDateFormat123 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                String currentDateandTime12hrs123 = simpleDateFormat123.format(new Date());
+
+             //   dashboardDataResponseCall(transaction_type,transaction_way,user_id,"01-11-2022 02:48 pm",currentDateandTime12hrs123,"Asia/Kolkata");
+
                 Log.w(TAG,"rl_weekly start_date : "+start_date+" Previous7days : "+Previous7days);
            break;
 
@@ -371,7 +492,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 start_date = monthlystartdate;
                 end_date = monthlyenddate;
-                dashboardDataResponseCall(start_date,end_date);
+
+                SimpleDateFormat simpleDateFormat21 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                String currentDateandTime12hrs121 = simpleDateFormat21.format(new Date());
+
+              //  dashboardDataResponseCall(transaction_type,transaction_way,user_id,"01-11-2022 02:48 pm",currentDateandTime12hrs121,"Asia/Kolkata");
 
                 break;
 
@@ -395,7 +520,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 start_date = annuallystartdate;
                 end_date = annuallyenddate;
 
-                dashboardDataResponseCall(start_date,end_date);
+                SimpleDateFormat simpleDateFormat32 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                String currentDateandTime12hrs132 = simpleDateFormat32.format(new Date());
+
+              //  dashboardDataResponseCall(transaction_type,transaction_way,user_id,"01-11-2022 02:48 pm",currentDateandTime12hrs132,"Asia/Kolkata");
 
                 break;
         }
@@ -447,33 +575,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Log.w(TAG, "FCMRequest" + new Gson().toJson(fcmRequest));
         return fcmRequest;
     }
-    @SuppressLint("SetTextI18n")
-    private void showincomeTab() {
-        ll_total_expense.setVisibility(View.GONE);
-        ll_total_income.setVisibility(View.VISIBLE);
-        transaction_way = "Credit";
-        showincome = true;
-        txt_lbl_expensetab.setBackgroundResource(R.color.white);
-        txt_lbl_incometab.setBackgroundResource(R.drawable.rectangle_corner_bg_thicblue);
-        txt_lbl_incometab.setTextColor(getResources().getColor(R.color.white));
-        txt_lbl_expensetab.setTextColor(getResources().getColor(R.color.text_black));
-
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void showExpenseTab() {
-        ll_total_expense.setVisibility(View.VISIBLE);
-        ll_total_income.setVisibility(View.GONE);
-        transaction_way = "Debit";
-        showincome = false;
-        txt_lbl_expensetab.setBackgroundResource(R.drawable.rectangle_corner_bg_thicblue);
-        txt_lbl_incometab.setBackgroundResource(R.color.white);
-        txt_lbl_incometab.setTextColor(getResources().getColor(R.color.text_black));
-        txt_lbl_expensetab.setTextColor(getResources().getColor(R.color.white));
-
-    }
-
-
 
     @SuppressLint("LogNotTimber")
     private void paymentTypeListResponseCall() {
@@ -523,114 +624,113 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    @SuppressLint("LogNotTimber")
-    private void dashboardDataResponseCall(String start_date,String end_date) {
-        avi_indicator.setVisibility(View.VISIBLE);
-        avi_indicator.smoothToShow();
-        RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
-        Call<DashboardDataResponse> call = apiInterface.dashboardDataResponseCall(RestUtils.getContentType(), dashboardDataRequest(start_date,end_date));
-        Log.w(TAG,"DashboardDataResponse url  :%s"+" "+ call.request().url().toString());
-
-        call.enqueue(new Callback<DashboardDataResponse>() {
-            @SuppressLint({"LogNotTimber", "SetTextI18n"})
-            @Override
-            public void onResponse(@NonNull Call<DashboardDataResponse> call, @NonNull Response<DashboardDataResponse> response) {
-                avi_indicator.smoothToHide();
-                Log.w(TAG,"DashboardDataResponse" + new Gson().toJson(response.body()));
-                if (response.body() != null) {
-
-                    if (200 == response.body().getCode()) {
-                        if(response.body().getData() != null && response.body().getData().size()>0) {
-                            Log.w(TAG,"DashboardDataResponse size : " + response.body().getData().size());
-                            txt_latest_transaction.setText("Latest "+response.body().getData().size()+" Transactions");
-                            rv_transaction.setVisibility(View.VISIBLE);
-                            txt_no_records.setVisibility(View.GONE);
-                            setTransactionListView(response.body().getData());
-
-                        }
-                        else{
-                            rv_transaction.setVisibility(View.GONE);
-                            txt_no_records.setVisibility(View.GONE);
-                            txt_no_records.setText(getResources().getString(R.string.no_new_transactions_are_available));
-                            txt_latest_transaction.setText("Latest "+0+" Transactions");
-
-                        }
-
-                        if(response.body().getBalance() != null){
-                            if(response.body().getBalance().getCredit_amount() != 0) {
-                                txt_income.setText("\u20B9 " + response.body().getBalance().getCredit_amount());
-                            }else{
-                                txt_income.setText("\u20B9 " + 0);
-                            }
-                            if(response.body().getBalance().getDebit_amount() != 0) {
-                                txt_expense.setText("\u20B9 " + response.body().getBalance().getDebit_amount());
-                            }else{
-                                txt_expense.setText("\u20B9 " + 0);
-                            }
-                            if(response.body().getBalance().getBalance_amount() != 0) {
-                                txt_balance.setText("\u20B9 " + response.body().getBalance().getBalance_amount());
-                            }else{
-                                txt_balance.setText("\u20B9 " + 0);
-                            }
-                        }
-
-
-                    } else {
-                        showErrorLoading(response.body().getMessage());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<DashboardDataResponse> call,@NonNull Throwable t) {
-                avi_indicator.smoothToHide();
-                Log.e("DashboardDataRe flr", "--->" + t.getMessage());
-            }
-        });
-
-    }
-    private DashboardDataRequest dashboardDataRequest(String start_date,String end_date) {
-        /*
-         * transaction_type : Cash
-         * transaction_way : Debit
-         * user_id : 617a7c37eeb3a520395e2f15
-         * start_date : 23-10-2021
-         * end_date : 23-10-2021
-         */
-
-
-        DashboardDataRequest dashboardDataRequest = new DashboardDataRequest();
-        dashboardDataRequest.setTransaction_type(transaction_type);
-        dashboardDataRequest.setTransaction_way(transaction_way);
-        dashboardDataRequest.setUser_id(user_id);
-        dashboardDataRequest.setStart_date(start_date);
-        dashboardDataRequest.setEnd_date(end_date);
-
-        Log.w(TAG,"dashboardDataRequest "+ new Gson().toJson(dashboardDataRequest));
-        return dashboardDataRequest;
-    }
-
-    public void showErrorLoading(String errormesage){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-        alertDialogBuilder.setMessage(errormesage);
-        alertDialogBuilder.setPositiveButton("ok",
-                (arg0, arg1) -> hideLoading());
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-    public void hideLoading(){
-        try {
-            alertDialog.dismiss();
-        }catch (Exception ignored){
-
-        }
-    }
-
-    private void setTransactionListView(List<DashboardDataResponse.DataBean> data) {
-        rv_transaction.setLayoutManager(new LinearLayoutManager(getContext()));
-        rv_transaction.setItemAnimator(new DefaultItemAnimator());
-        TransactionListAdapter transactionListAdapter = new TransactionListAdapter(mContext, data);
-        rv_transaction.setAdapter(transactionListAdapter);
-
-    }
+//    private void dashboardDataResponseCall(String start_date,String end_date) {
+//        avi_indicator.setVisibility(View.VISIBLE);
+//        avi_indicator.smoothToShow();
+//        RestApiInterface apiInterface = APIClient.getClient().create(RestApiInterface.class);
+//        Call<DashboardDataResponse> call = apiInterface.dashboardDataResponseCall(RestUtils.getContentType(), dashboardDataRequest(start_date,end_date));
+//        Log.w(TAG,"DashboardDataResponse url  :%s"+" "+ call.request().url().toString());
+//
+//        call.enqueue(new Callback<DashboardDataResponse>() {
+//            @SuppressLint({"LogNotTimber", "SetTextI18n"})
+//            @Override
+//            public void onResponse(@NonNull Call<DashboardDataResponse> call, @NonNull Response<DashboardDataResponse> response) {
+//                avi_indicator.smoothToHide();
+//                Log.w(TAG,"DashboardDataResponse" + new Gson().toJson(response.body()));
+//                if (response.body() != null) {
+//
+//                    if (200 == response.body().getCode()) {
+//                        if(response.body().getData() != null && response.body().getData().size()>0) {
+//                            Log.w(TAG,"DashboardDataResponse size : " + response.body().getData().size());
+//                            txt_latest_transaction.setText("Latest "+response.body().getData().size()+" Transactions");
+//                            rv_transaction.setVisibility(View.VISIBLE);
+//                            txt_no_records.setVisibility(View.GONE);
+//                            setTransactionListView(response.body().getData());
+//
+//                        }
+//                        else{
+//                            rv_transaction.setVisibility(View.GONE);
+//                            txt_no_records.setVisibility(View.GONE);
+//                            txt_no_records.setText(getResources().getString(R.string.no_new_transactions_are_available));
+//                            txt_latest_transaction.setText("Latest "+0+" Transactions");
+//
+//                        }
+//
+//                        if(response.body().getBalance() != null){
+//                            if(response.body().getBalance().getCredit_amount() != 0) {
+//                                txt_income.setText("\u20B9 " + response.body().getBalance().getCredit_amount());
+//                            }else{
+//                                txt_income.setText("\u20B9 " + 0);
+//                            }
+//                            if(response.body().getBalance().getDebit_amount() != 0) {
+//                                txt_expense.setText("\u20B9 " + response.body().getBalance().getDebit_amount());
+//                            }else{
+//                                txt_expense.setText("\u20B9 " + 0);
+//                            }
+//                            if(response.body().getBalance().getBalance_amount() != 0) {
+//                                txt_balance.setText("\u20B9 " + response.body().getBalance().getBalance_amount());
+//                            }else{
+//                                txt_balance.setText("\u20B9 " + 0);
+//                            }
+//                        }
+//
+//
+//                    } else {
+//                        showErrorLoading(response.body().getMessage());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<DashboardDataResponse> call,@NonNull Throwable t) {
+//                avi_indicator.smoothToHide();
+//                Log.e("DashboardDataRe flr", "--->" + t.getMessage());
+//            }
+//        });
+//
+//    }
+//    private DashboardDataRequest dashboardDataRequest(String start_date,String end_date) {
+//        /*
+//         * transaction_type : Cash
+//         * transaction_way : Debit
+//         * user_id : 617a7c37eeb3a520395e2f15
+//         * start_date : 23-10-2021
+//         * end_date : 23-10-2021
+//         */
+//
+//
+//        DashboardDataRequest dashboardDataRequest = new DashboardDataRequest();
+//        dashboardDataRequest.setTransaction_type(transaction_type);
+//        dashboardDataRequest.setTransaction_way(transaction_way);
+//        dashboardDataRequest.setUser_id(user_id);
+//        dashboardDataRequest.setStart_date(start_date);
+//        dashboardDataRequest.setEnd_date(end_date);
+//
+//        Log.w(TAG,"dashboardDataRequest "+ new Gson().toJson(dashboardDataRequest));
+//        return dashboardDataRequest;
+//    }
+//
+//    public void showErrorLoading(String errormesage){
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+//        alertDialogBuilder.setMessage(errormesage);
+//        alertDialogBuilder.setPositiveButton("ok",
+//                (arg0, arg1) -> hideLoading());
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        alertDialog.show();
+//    }
+//    public void hideLoading(){
+//        try {
+//            alertDialog.dismiss();
+//        }catch (Exception ignored){
+//
+//        }
+//    }
+//
+//    private void setTransactionListView(List<DashboardDataResponse.DataBean> data) {
+//        rv_transaction.setLayoutManager(new LinearLayoutManager(getContext()));
+//        rv_transaction.setItemAnimator(new DefaultItemAnimator());
+//        TransactionListAdapter transactionListAdapter = new TransactionListAdapter(mContext, data);
+//        rv_transaction.setAdapter(transactionListAdapter);
+//
+//    }
 }
